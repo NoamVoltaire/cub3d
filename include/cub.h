@@ -28,6 +28,7 @@
 # define tPI 6.28318530718
 # define PII 1.57079632679
 # define PIII 4.71238898038
+# define DR 0.0174533
 
 
 // #include <time.h>
@@ -37,6 +38,9 @@ typedef struct s_ray
 	double	ry;
 	double	xo;
 	double	yo;
+	int	hit_data;
+	int	hit_dir;
+	int	hit_len;
 }		t_ray;
 
 typedef struct s_map
@@ -96,8 +100,10 @@ void	draw_rays(t_player player, t_map map, t_vars *vars);
 int		draw_cube_player(t_player player, t_vars *vars);
 
 //RAYCASTING
-void	r_offset_calc(t_ray *ray, t_map map, t_player player);
-int	r_hit_wall(t_ray ray, t_map map, t_vars *vars);
+t_ray	casting(t_player player, t_map map, t_vars *vars);
+void	r_offset_calc_x(t_ray *ray, t_map map, t_player player);
+void	r_offset_calc_y(t_ray *ray, t_map map, t_player player);
+int	r_hit_wall(t_ray *ray, t_map map, t_vars *vars);
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);
