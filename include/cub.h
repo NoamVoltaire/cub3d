@@ -31,6 +31,14 @@
 # define DR 0.0174533
 
 
+typedef	struct s_textures
+{
+	void	*no_texture;
+	void	*so_texture;
+	void	*we_texture;
+	void	*ea_texture;
+	char	*t_addr;
+}	t_texture;
 // #include <time.h>
 typedef struct s_ray
 {
@@ -40,7 +48,7 @@ typedef struct s_ray
 	double	yo;
 	int	hit_data;
 	int	hit_dir;
-	int	hit_len;
+	float	hit_len;
 }		t_ray;
 
 typedef struct s_map
@@ -82,6 +90,7 @@ typedef struct s_vars
 	int			endian;
 	t_map		map;
 	t_player	player;
+	t_texture	textures;
 
 }		t_vars;
 
@@ -89,21 +98,24 @@ void	init_vars(t_vars *vars);
 void	init_map(t_map *map);
 void	init_player(t_player *player);
 void	init_window(t_vars *vars);
+void	init_texture(t_vars *vars);
 void	the_hooks(t_vars *vars);
 int		handle_key_press(int keycode, t_vars *vars);
 int		handle_key_release(int keycode, t_vars *vars);
 int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
-void	update_pos(t_player *player);
+void	update_pos(t_player *player, t_map map);
 void	draw_rays(t_player player, t_map map, t_vars *vars);
 int		draw_cube_player(t_player player, t_vars *vars);
 
 //RAYCASTING
-t_ray	casting(t_player player, t_map map, t_vars *vars);
-void	r_offset_calc_x(t_ray *ray, t_map map, t_player player);
-void	r_offset_calc_y(t_ray *ray, t_map map, t_player player);
-int	r_hit_wall(t_ray *ray, t_map map, t_vars *vars);
+t_ray	casting(t_player player, t_map map, t_vars *vars, double ra);
+void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra);
+void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra);
+float	r_hit_wall(t_ray *ray, t_map map, t_vars *vars);
+
+void	draw_graphics(t_ray ray, int ray_nb, t_vars *vars);
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);

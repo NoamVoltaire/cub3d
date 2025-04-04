@@ -17,4 +17,5 @@ void	init_vars(t_vars *vars)
 	init_map(&vars->map); //TEMPORARY
 	init_player(&vars->player);
 	init_window(vars);
+	init_texture(vars);
 }

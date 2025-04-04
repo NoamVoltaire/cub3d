@@ -40,7 +40,7 @@ void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1)
 		}
 
 	}
-	printf("line drawn\n\n");
+	//printf("line drawn\n\n");
 
 }
 

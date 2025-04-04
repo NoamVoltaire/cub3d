@@ -4,15 +4,32 @@
 
 void	draw_rays(t_player player, t_map map, t_vars *vars)
 {
-	//int	r;
+	double	ra;
 	t_ray	ray;
+	int	nb_rays;
 
-//	r = 0;
-//	while (r < 90)
-//	{
-		ray = casting(player, map, vars);
-//	}
+	nb_rays = 0;
+	ra = player.angle - DR * 32;
+	//ra = player.angle;
+	//if (ra < 0)
+	//	ra += 2 * PI;
+	//if (ra > 2 * PI)
+	//	ra -= 2 * PI;
+//	while (nb_rays < 1)
+	while (nb_rays < 64)
+	{
+	if (ra < 0)
+		ra += 2 * PI;
+	if (ra > 2 * PI)
+		ra -= 2 * PI;
+	//printf("THE value of ray.hitlen = %f\n", ray.hit_len);
+		ray = casting(player, map, vars, ra);
+		ra += DR;
+		nb_rays++;
+		draw_graphics(ray, nb_rays, vars);
+	}
 	
+	//draw_graphics(ray, ra, vars);
 	(void)ray;
 	//draw() rays should be named raycasting()
 		//and what's here should be a function named casting()

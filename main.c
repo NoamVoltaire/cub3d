@@ -18,7 +18,9 @@ int	main(void)
 
 	init_vars(&vars);
 	the_hooks(&vars);
-	// printf("vars.player.xpos = %f\n", vars.player.xpos);
+	//if (!vars.textures.t_addr)  // Exit function early to prevent crash
+		 //printf("ITSNULLLLLLLLLL");
+		// printf("vars.player.xpos = %f\n", vars.player.xpos);
 	mlx_loop_hook(vars.mlx, every_frame, &vars);
 	mlx_loop(vars.mlx);
 }
