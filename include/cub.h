@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/03/21 17:20:19 by noam             ###   ########.fr       */
+/*   Updated: 2025/04/21 20:28:10 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef	struct s_textures
 	void	*so_texture;
 	void	*we_texture;
 	void	*ea_texture;
-	char	*t_addr;
+	char	*t_addr_no;
+	char	*t_addr_ea;
 }	t_texture;
 // #include <time.h>
 typedef struct s_ray
@@ -98,7 +99,7 @@ void	init_vars(t_vars *vars);
 void	init_map(t_map *map);
 void	init_player(t_player *player);
 void	init_window(t_vars *vars);
-void	init_texture(t_vars *vars);
+void	init_textures(t_vars *vars);
 void	the_hooks(t_vars *vars);
 int		handle_key_press(int keycode, t_vars *vars);
 int		handle_key_release(int keycode, t_vars *vars);

@@ -17,7 +17,7 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra)
 
 	(void)dof;
 	dof = 0;
-	ray->hit_dir = 1;
+	ray->hit_dir = 0;
 	if (fabs(ra) < 0.0001 || fabs(PI - ra) < 0.0001)
 	{
 		////printf("WEGETTHERE*****\n");
@@ -37,6 +37,7 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra)
 			ray->rx = (player.ypos - ray->ry) * aTan + player.xpos;
 			ray->yo = -map.tilesize;
 			ray->xo = -ray->yo * aTan;
+			ray->hit_dir = 0;
 		}
 		else if (ra < PI)
 		{
@@ -45,6 +46,7 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra)
 			ray->rx = (player.ypos - ray->ry) * aTan + player.xpos;
 			ray->yo = map.tilesize;
 			ray->xo = -ray->yo * aTan;
+			ray->hit_dir = 2;
 		}
 	}
 }
@@ -79,6 +81,7 @@ void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra)
 			ray->ry = (player.xpos - ray->rx) * nTan + player.ypos;
 			ray->xo = -map.tilesize;
 			ray->yo = -ray->xo * nTan;
+			ray->hit_dir = 3;
 		}
 		else if (ra < PII || ra > PIII)
 		{
@@ -87,6 +90,7 @@ void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra)
 			ray->ry = (player.xpos - ray->rx) * nTan + player.ypos;
 			ray->xo = map.tilesize;
 			ray->yo = -ray->xo * nTan;
+			ray->hit_dir = 1;
 		}
 	}
 }
