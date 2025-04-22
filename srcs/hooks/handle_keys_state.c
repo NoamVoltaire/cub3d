@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_keys_states.c                               :+:      :+:    :+:   */
+/*   handle_keys_state.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 23:51:36 by noam              #+#    #+#             */
-/*   Updated: 2025/03/15 23:55:01 by noam             ###   ########.fr       */
+/*   Updated: 2025/04/22 16:09:51 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	handle_key_press(int keycode, t_vars *vars)
 		vars->player.keybind.left = true;
 	if (keycode == XK_d)
 		vars->player.keybind.right = true;
+	if (keycode == 65307)
+		close_window(vars);
 	return (0);
 }
 

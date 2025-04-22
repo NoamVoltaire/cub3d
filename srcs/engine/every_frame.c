@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 23:59:09 by noam              #+#    #+#             */
-/*   Updated: 2025/03/16 00:01:25 by noam             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:14:46 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	every_frame(void *param)
 	//printf("vars.player.ypos = %f\n", vars->player.ypos);
 	//printf("vars.player.angle = %f\n", vars->player.angle);
 	
-	draw_cube_player(vars->player, vars);
+	// draw_cube_player(vars->player, vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->img, 0, 0);
 	return (0);
 }

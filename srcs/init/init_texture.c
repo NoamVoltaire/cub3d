@@ -27,8 +27,8 @@ void	init_textures(t_vars *vars)
 {
 	t_texture	texture;
 
-	texture.t_addr_no = get_textures_adrr(vars, texture.no_texture, "./ressources/bricks.xpm");
-	texture.t_addr_ea = get_textures_adrr(vars, texture.ea_texture, "./ressources/bricks.xpm");
+	texture.t_addr_no = get_textures_adrr(vars, texture.no_texture, "./ressources/d_64.xpm");
+	texture.t_addr_ea = get_textures_adrr(vars, texture.ea_texture, "./ressources/d_64.xpm");
 // 	void	*img;
 // 	int bpp = 0, w = 0, h = 0;u
 // 	char	*t_addr;

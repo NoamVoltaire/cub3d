@@ -23,17 +23,18 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra)
 		////printf("WEGETTHERE*****\n");
 		ray->rx = player.xpos;
 		ray->ry = player.ypos;
-		dof = 5;
+		dof = map.tilesize;
 	}
 	else
 	{
+		ray->ra = ra;
 		//aTan = -1 / tan(ra);
 		aTan = -1 / safe_tan(ra);
 		//printf("aTan = %f\n", aTan);
 		if (ra > PI)
 		{
 		//printf("SUPP == \n");
-			ray->ry = (((int)player.ypos >> 7 )<< 7) - 0.0001;
+			ray->ry = (((int)player.ypos / map.tilesize) * map.tilesize) - 0.0001;
 			ray->rx = (player.ypos - ray->ry) * aTan + player.xpos;
 			ray->yo = -map.tilesize;
 			ray->xo = -ray->yo * aTan;
@@ -42,7 +43,7 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra)
 		else if (ra < PI)
 		{
 		//printf("INFF == \n");
-			ray->ry = (((int)player.ypos >> 7)  << 7) + map.tilesize;
+			ray->ry = (((int)player.ypos / map.tilesize) * map.tilesize) + map.tilesize;
 			ray->rx = (player.ypos - ray->ry) * aTan + player.xpos;
 			ray->yo = map.tilesize;
 			ray->xo = -ray->yo * aTan;
@@ -66,18 +67,19 @@ void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra)
 		//printf("WEGETTHERE*****\n");
 		ray->rx = player.xpos;
 		ray->ry = player.ypos;
-		dof = 5;
+		dof = map.tilesize;
 	}
 	else
 	{
+		ray->ra = ra;
 		nTan = -tan(ra);
 		//nTan = -safe_tan(ra);
 		//printf("nTan = %f\n", nTan);
 		if (ra > PII && ra < PIII)
 		{
 		//printf("LEFT== \n");
-////printf("player.xpos before: %d\n", (((int)player.xpos >> 7 )<< 7));
-			ray->rx = (((int)player.xpos >> 7 )<< 7) - 0.0001;
+////printf("player.xpos before: %d\n", (((int)player.xpos / map.tilesize) * map.tilesize);
+			ray->rx = (((int)player.xpos / map.tilesize) * map.tilesize) - 0.0001;
 			ray->ry = (player.xpos - ray->rx) * nTan + player.ypos;
 			ray->xo = -map.tilesize;
 			ray->yo = -ray->xo * nTan;
@@ -86,7 +88,7 @@ void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra)
 		else if (ra < PII || ra > PIII)
 		{
 		//printf("RIGHT == \n");
-			ray->rx = (((int)player.xpos >> 7)  << 7) + map.tilesize;
+			ray->rx = (((int)player.xpos / map.tilesize) * map.tilesize) + map.tilesize;
 			ray->ry = (player.xpos - ray->rx) * nTan + player.ypos;
 			ray->xo = map.tilesize;
 			ray->yo = -ray->xo * nTan;

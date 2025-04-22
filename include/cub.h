@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/04/21 20:28:10 by noam             ###   ########.fr       */
+/*   Updated: 2025/04/22 16:33:06 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdbool.h>
 # include <string.h>
 # include <math.h>
-# define HEIGHT 1280
-# define WIDTH 1280
+# define HEIGHT 1880
+# define WIDTH 2540
 # define PI 3.141592653589793//23846
 # define tPI 6.28318530718
 # define PII 1.57079632679
@@ -43,6 +43,7 @@ typedef	struct s_textures
 // #include <time.h>
 typedef struct s_ray
 {
+	double	ra;
 	double	rx;
 	double	ry;
 	double	xo;
@@ -101,6 +102,7 @@ void	init_player(t_player *player);
 void	init_window(t_vars *vars);
 void	init_textures(t_vars *vars);
 void	the_hooks(t_vars *vars);
+int close_window(t_vars *vars);
 int		handle_key_press(int keycode, t_vars *vars);
 int		handle_key_release(int keycode, t_vars *vars);
 int		every_frame(void *param);

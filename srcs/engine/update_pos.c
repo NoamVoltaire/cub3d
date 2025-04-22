@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 00:06:53 by noam              #+#    #+#             */
-/*   Updated: 2025/03/16 00:07:30 by noam             ###   ########.fr       */
+/*   Updated: 2025/04/22 16:52:24 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ void	update_pos(t_player *player, t_map map)
 	else
 		yo = 20;
 	
-	mpx = player->xpos / 128;
-	mpy = player->ypos / 128;
-	pos_xo = (player->xpos + xo) / 128; 
-	pos_yo = (player->ypos + yo) / 128; 
+	mpx = player->xpos / map.tilesize;
+	mpy = player->ypos / map.tilesize;
+	pos_xo = (player->xpos + xo) / map.tilesize; 
+	pos_yo = (player->ypos + yo) / map.tilesize; 
 	//neg_xo = (player->xpos - xo) / 128; 
 	//neg_yo = (player->ypos - yo) / 128; 
 	
 
 	//printf("the pos_xo = %d\n", pos_xo);
 	//printf("the pos_yo = %d\n", pos_yo);
+	// printf("mpx = %d\n", mpx);
+	// printf("mpy = %d\n", mpy);
 
 	if (player->keybind.forwards)
 	{
@@ -51,7 +53,7 @@ void	update_pos(t_player *player, t_map map)
 		if (map.grid[mpy][pos_xo] == 0)
 			player->xpos += player->xdelt / 2;
 		if (map.grid[pos_yo][mpx] == 0)
-		player->ypos += player->ydelt / 2;
+			player->ypos += player->ydelt / 2;
 		// player->ypos -= 2;
 	}
 	if (player->keybind.backwards)

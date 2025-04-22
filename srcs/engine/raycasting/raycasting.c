@@ -9,14 +9,14 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 	int	nb_rays;
 
 	nb_rays = 0;
-	ra = player.angle - DR * 32;
+	ra = player.angle -(DR / 2 * 64);
 	//ra = player.angle;
 	//if (ra < 0)
 	//	ra += 2 * PI;
 	//if (ra > 2 * PI)
 	//	ra -= 2 * PI;
 //	while (nb_rays < 1)
-	while (nb_rays < 64)
+	while (nb_rays < 128)
 	{
 	if (ra < 0)
 		ra += 2 * PI;
@@ -24,7 +24,7 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 		ra -= 2 * PI;
 	//printf("THE value of ray.hitlen = %f\n", ray.hit_len);
 		ray = casting(player, map, vars, ra);
-		ra += DR;
+		ra += DR/2;
 		nb_rays++;
 		draw_graphics(ray, nb_rays, vars);
 	}
