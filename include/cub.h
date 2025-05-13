@@ -105,6 +105,7 @@ void	the_hooks(t_vars *vars);
 int close_window(t_vars *vars);
 int		handle_key_press(int keycode, t_vars *vars);
 int		handle_key_release(int keycode, t_vars *vars);
+int	escape(int keycode,t_vars *vars);
 int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);

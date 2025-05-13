@@ -23,10 +23,10 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 	if (ra > 2 * PI)
 		ra -= 2 * PI;
 	//printf("THE value of ray.hitlen = %f\n", ray.hit_len);
-		ray = casting(player, map, vars, ra);
-		ra += DR/2;
-		nb_rays++;
-		draw_graphics(ray, nb_rays, vars);
+	ray = casting(player, map, vars, ra);
+	ra += DR/2;
+	nb_rays++;
+	draw_graphics(ray, nb_rays, vars);
 	}
 	
 	//draw_graphics(ray, ra, vars);
