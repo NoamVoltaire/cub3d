@@ -71,15 +71,15 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 ////printf("player.ypos before: %d\n", (((int)player.ypos >> 7 )<< 7));
 //				ry = (((int)player.ypos >> 7 )<< 7) - 0.0001;
 //				rx = (player.ypos - ry) * aTan + player.xpos;
-//				yo = -map.tilesize;
+//				yo = -map->tilesize;
 //				xo = -yo * aTan;
 //			}
 //			else if (ra < PI)
 //			{
 //			printf("INFF == \n");
-//				ry = (((int)player.ypos >> 7)  << 7) + map.tilesize;
+//				ry = (((int)player.ypos >> 7)  << 7) + map->tilesize;
 //				rx = (player.ypos - ry) * aTan + player.xpos;
-//				yo = map.tilesize;
+//				yo = map->tilesize;
 //				xo = -yo * aTan;
 //			}
 //			if (ra > PII && ra < PIII)
@@ -88,15 +88,15 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 ////printf("player.xpos before: %d\n", (((int)player.xpos >> 7 )<< 7));
 //				rx = (((int)player.xpos >> 7 )<< 7) - 0.0001;
 //				ry = (player.xpos - rx) * nTan + player.ypos;
-//				xo = -map.tilesize;
+//				xo = -map->tilesize;
 //				yo = -xo * nTan;
 //			}
 //			else if (ra < PII || ra > PIII)
 //			{
 //			printf("RIGHT == \n");
-//				rx = (((int)player.xpos >> 7)  << 7) + map.tilesize;
+//				rx = (((int)player.xpos >> 7)  << 7) + map->tilesize;
 //				ry = (player.xpos - rx) * nTan + player.ypos;
-//				xo = map.tilesize;
+//				xo = map->tilesize;
 //				yo = -xo * nTan;
 //			}
 //		}
@@ -121,7 +121,7 @@ void	draw_rays(t_player player, t_map map, t_vars *vars)
 //			my = (int)ry >> 7;
 //		//printf("my = %d\n", my);
 //		//printf("mx = %d\n", mx);
-//			if (my >= 0 && my < map.mapy && mx >= 0 && mx < map.mapx && map.grid[my][mx] == 1)
+//			if (my >= 0 && my < map->mapy && mx >= 0 && mx < map->mapx && map->grid[my][mx] == 1)
 //				dof = 5;
 //			else
 //			{
