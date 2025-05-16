@@ -6,12 +6,18 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/04/22 16:33:06 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/16 17:15:08 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
+
+# define BUFFER_SIZE 42
+# define GNL_SUCCESS 0
+# define GNL_EOF 1
+# define GNL_ESYS -1
+# define GNL_ERANGE -2
 
 # include <mlx.h>
 # include <stdlib.h>
