@@ -1,10 +1,14 @@
 
-NAME = cub3d
+NAME = cub3D
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 VPATH = srcs/ srcs/init/ srcs/hooks/ srcs/engine/ srcs/utils srcs/engine/raycasting srcs/parse
-FLAGS = -Wall -Wextra -Werror -Iinclude -Iminilibx-linux
-LFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm
+FLAGS = -Wall -Wextra -Werror -Iinclude -Iminilibx-linux -Ilibft
+LFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm -Llibft -lft
+LIBFT = libft/libft.a
+LIBFT_DIR = libft/
+MLX = minilibx-linux/libmlx.a
+MLX_DIR = minilibx-linux/
 
 INIT = init_vars init_player init_map init_mlx_window init_texture
 HOOKS =  the_hooks handle_keys_state escape
@@ -29,12 +33,18 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 #  echo :
 # 	  @echo $(OBJ)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 
 $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
+
+$(MLX):
+	make -C $(MLX_DIR)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR)

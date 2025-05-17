@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/16 17:15:08 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:25:39 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_vars
 	t_texture	textures;
 
 }		t_vars;
+
+int		main_loop(t_vars *vars);
 
 void	init_vars(t_vars *vars);
 void	init_map(t_map *map);
