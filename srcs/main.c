@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:28:08 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/16 17:07:41 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:44:12 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_map_name(char *str)
 	len = ft_strlen(str);
 	if (len < 5)
 		return (1);
-	return (ft_strcmp(&str[len - 4], ".cub"));
+	return (ft_strncmp(&str[len - 4], ".cub", 4));
 }
 
 int	main(int ac, char **av)

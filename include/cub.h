@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/17 15:25:39 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:50:24 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@
 # include <X11/X.h> 
 # include <stdbool.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <math.h>
+# include "libft.h"
 # define HEIGHT 1880
 # define WIDTH 2540
 # define PI 3.141592653589793//23846
@@ -102,7 +106,10 @@ typedef struct s_vars
 
 }		t_vars;
 
-int		main_loop(t_vars *vars);
+int		main_loop(t_vars vars);
+
+//PARSING
+int		parse_into_vars(int fd, t_vars *vars);
 
 void	init_vars(t_vars *vars);
 void	init_map(t_map *map);

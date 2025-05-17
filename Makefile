@@ -22,6 +22,7 @@ SRCS = $(addsuffix .c, $(INIT))\
 		$(addsuffix .c, $(ENGINE))\
 		$(addsuffix .c, $(RAYCASTING))\
 		$(addsuffix .c, $(UTILS))\
+		$(addsuffix .c, $(PARSE))\
 		main_loop.c\
 		main.c
 #  echo :
