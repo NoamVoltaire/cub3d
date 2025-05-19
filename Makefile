@@ -9,6 +9,7 @@ LIBFT = libft/libft.a
 LIBFT_DIR = libft/
 MLX = minilibx-linux/libmlx.a
 MLX_DIR = minilibx-linux/
+HDR = include/cub.h
 
 INIT = init_vars init_player init_map init_mlx_window init_texture
 HOOKS =  the_hooks handle_keys_state escape
@@ -37,7 +38,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 
-$(OBJ_DIR)%.o: %.c
+$(OBJ_DIR)%.o: %.c $(HDR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
 
