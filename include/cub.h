@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/17 15:50:24 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:26:55 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB_H
 
 # define BUFFER_SIZE 42
+# define FD_MAX 1024
 # define GNL_SUCCESS 0
 # define GNL_EOF 1
 # define GNL_ESYS -1
@@ -40,6 +41,13 @@
 # define PIII 4.71238898038
 # define DR 0.0174533
 
+typedef struct s_gnl
+{
+	char	*save;
+	char	*tmp_save;
+	char	**line;
+	int		fd;
+}	t_gnl;
 
 typedef	struct s_textures
 {
@@ -110,6 +118,7 @@ int		main_loop(t_vars vars);
 
 //PARSING
 int		parse_into_vars(int fd, t_vars *vars);
+int		next_gnl(char **line, int fd);
 
 void	init_vars(t_vars *vars);
 void	init_map(t_map *map);

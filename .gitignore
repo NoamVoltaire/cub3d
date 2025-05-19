@@ -68,7 +68,7 @@ dkms.conf
 
 .clangd
 compile_flags.txt
-cub3d
+cub3D
 a.out
 cub3d.en.subject.pdf
 *.swp
