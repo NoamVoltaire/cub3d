@@ -22,8 +22,8 @@ void	set_keyb(t_keyb *keybind)
 
 void	init_player(t_player *player)
 {
-	player->xpos = (WIDTH / 2) / 2;
-	player->ypos = (HEIGHT / 2) / 2;
+	player->xpos = WIDTH / 2;
+	player->ypos = HEIGHT / 2;
 	player->angle = 0 ;
 	player->xdelt = cos(player->angle) * 5;
 	player->ydelt = sin(player->angle) * 5;

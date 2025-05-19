@@ -17,7 +17,7 @@ int	every_frame(void *param)
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
-	memset(vars->addr, 0, ((WIDTH / 2) * (HEIGHT / 2)) 
+	memset(vars->addr, 0, (WIDTH * HEIGHT) 
 		* (vars->bits_per_pixel / 8));
 	draw_map(vars->map, vars);
 	update_pos(&vars->player, vars->map);

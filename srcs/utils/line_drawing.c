@@ -26,7 +26,7 @@ void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1)
 		//printf("x0 = %d\n y0 = %d\n", x0, y0);
 		my_mlx_pixel_put(vars, x0, y0,03770000);
 
-		if ((x0 == x1 && y0 == y1) || x0 == 1 || y0 == 1 || x0 > (WIDTH / 2) || y0 > (HEIGHT / 2))
+		if ((x0 == x1 && y0 == y1) || x0 == 1 || y0 == 1 || x0 > WIDTH || y0 > HEIGHT)
 			break;
 		if (err * 2 > -dy)
 		{

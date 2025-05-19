@@ -22,8 +22,10 @@
 # include <stdbool.h>
 # include <string.h>
 # include <math.h>
-# define HEIGHT 1880
-# define WIDTH 2540
+//# define HEIGHT 1880
+# define HEIGHT 940
+//# define WIDTH 2540
+# define WIDTH 1270
 # define PI 3.141592653589793//23846
 # define tPI 6.28318530718
 # define PII 1.57079632679
@@ -41,6 +43,17 @@ typedef	struct s_textures
 	char	*t_addr_ea;
 }	t_texture;
 // #include <time.h>
+typedef struct s_raydraw
+{
+	float	t_y_step;
+	float	t_x_step;
+	float	y_uv;
+	float	x_uv;
+	int		t_y;
+	int		l_height;
+	int		y;
+}	t_raydraw;
+
 typedef struct s_ray
 {
 	double	ra;
@@ -51,6 +64,7 @@ typedef struct s_ray
 	int	hit_data;
 	int	hit_dir;
 	float	hit_len;
+	t_raydraw	render;
 }		t_ray;
 
 typedef struct s_map
@@ -119,7 +133,7 @@ void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra);
 void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra);
 float	r_hit_wall(t_ray *ray, t_map map, t_vars *vars);
 
-void	draw_graphics(t_ray ray, int ray_nb, t_vars *vars);
+void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);

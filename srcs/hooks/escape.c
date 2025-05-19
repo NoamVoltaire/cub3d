@@ -15,10 +15,8 @@
 void	delete_map(t_map *map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while(i < map->mapy)
 	{
 		free(map->grid[i]);
@@ -45,7 +43,6 @@ void	quit_everything(t_vars *vars)
 	mlx_destroy_display(vars->mlx);
 	//delete_map(&vars->map);
 	free(vars);
-
 	exit(0);
 }
 
