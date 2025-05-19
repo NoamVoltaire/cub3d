@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:15:50 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/19 12:27:50 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:26:55 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,37 @@ static t_list   *get_lines(int fd)
 	return (lines);
 }
 
+bool	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\n')
+	{
+		if (!ft_strchr("01 NSEW", line[i]))
+			return (false);
+		++i;
+	}
+	if (i == 0)
+		return (false);
+	return (true);
+}
+
 int	check_input_syntax(t_list *input)
 {
+	t_list	*line;
+
 	if (input == NULL)
 		return (1);
+	line = input;
+	while (line != NULL)
+	{
+		if (is_map_line(line->content))
+			printf("true\n");
+		else
+			printf("false\n");
+		line = line->next;
+	}
 	return (0);
 }
 
@@ -64,9 +91,8 @@ int	parse_into_vars(int fd, t_vars *vars)
 		printf("%s", (char *)ptr->content);
 		ptr = ptr->next;
 	}
+	if (check_input_syntax(lines) == 1)
+		return (1);
 	return (0);
-	//
-	//if (check_input_syntax(lines) == 1)
-	//	return (1);
 	//return (intialize_vars(lines, vars);
 }
