@@ -1,6 +1,6 @@
 #include <cub.h>
 
-t_ray	casting(t_player player, t_map map, t_vars *vars, double ra)
+t_ray	casting(t_player *player, t_map *map, t_vars *vars, double ra)
 {
 	t_ray	rayv;
 	t_ray	rayh;
@@ -10,7 +10,7 @@ t_ray	casting(t_player player, t_map map, t_vars *vars, double ra)
 	r_offset_calc_y(&rayh, map, player, ra);
 	rayv.hit_len = r_hit_wall(&rayv, map, vars);
 	rayh.hit_len = r_hit_wall(&rayh, map, vars);
-	fisheye = player.angle - ra;
+	fisheye = player->angle - ra;
 	if (fisheye < 0 )
 		fisheye += 2 * PI;
 	if (fisheye > 2 * PI)

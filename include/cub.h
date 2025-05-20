@@ -123,15 +123,15 @@ int	escape(int keycode,t_vars *vars);
 int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
-void	update_pos(t_player *player, t_map map);
-void	draw_rays(t_player player, t_map map, t_vars *vars);
+void	update_pos(t_player *player, t_map *map);
+void	draw_rays(t_player *player, t_map *map, t_vars *vars);
 int		draw_cube_player(t_player player, t_vars *vars);
 
 //RAYCASTING
-t_ray	casting(t_player player, t_map map, t_vars *vars, double ra);
-void	r_offset_calc_x(t_ray *ray, t_map map, t_player player, double ra);
-void	r_offset_calc_y(t_ray *ray, t_map map, t_player player, double ra);
-float	r_hit_wall(t_ray *ray, t_map map, t_vars *vars);
+t_ray	casting(t_player *player, t_map *map, t_vars *vars, double ra);
+void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra);
+void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra);
+float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars);
 
 void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
 

@@ -12,7 +12,7 @@
 
 #include <cub.h>
 
-void	update_pos(t_player *player, t_map map)
+void	update_pos(t_player *player, t_map *map)
 {
 	float	xo;
 	float	yo;
@@ -34,10 +34,10 @@ void	update_pos(t_player *player, t_map map)
 	else
 		yo = 20;
 	
-	mpx = player->xpos / map.tilesize;
-	mpy = player->ypos / map.tilesize;
-	pos_xo = (player->xpos + xo) / map.tilesize; 
-	pos_yo = (player->ypos + yo) / map.tilesize; 
+	mpx = player->xpos / map->tilesize;
+	mpy = player->ypos / map->tilesize;
+	pos_xo = (player->xpos + xo) / map->tilesize; 
+	pos_yo = (player->ypos + yo) / map->tilesize; 
 	//neg_xo = (player->xpos - xo) / 128; 
 	//neg_yo = (player->ypos - yo) / 128; 
 	
@@ -50,17 +50,17 @@ void	update_pos(t_player *player, t_map map)
 	if (player->keybind.forwards)
 	{
 
-		if (map.grid[mpy][pos_xo] == 0)
+		if (map->grid[mpy][pos_xo] == 0)
 			player->xpos += player->xdelt / 2;
-		if (map.grid[pos_yo][mpx] == 0)
+		if (map->grid[pos_yo][mpx] == 0)
 			player->ypos += player->ydelt / 2;
 		// player->ypos -= 2;
 	}
 	if (player->keybind.backwards)
 	{
-	//	if (map.grid[pos_xo][mpy] == 0)
+	//	if (map->grid[pos_xo][mpy] == 0)
 	//		player->xpos -= player->xdelt / 4;
-	//	if (map.grid[mpx][neg_yo] == 0)
+	//	if (map->grid[mpx][neg_yo] == 0)
 	//	player->ypos -= player->ydelt / 4;
 	player->xpos -= player->xdelt / 4;
 	player->ypos -= player->ydelt / 4;

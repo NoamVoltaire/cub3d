@@ -2,14 +2,14 @@
 #include <cub.h>
 
 
-void	draw_rays(t_player player, t_map map, t_vars *vars)
+void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 {
 	double	ra;
 	t_ray	ray;
 	int	nb_rays;
 
 	nb_rays = 0;
-	ra = player.angle -(DR / 2 * 64);
+	ra = player->angle -(DR / 2 * 64);
 	while (nb_rays < 128)
 	{
 	if (ra < 0)

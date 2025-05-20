@@ -202,5 +202,5 @@ void	init_map(t_map *map)
 
 	map->mapx = 32;
 	map->mapy = 32;
-	map->tilesize = WIDTH / 16; // adjust as needed
+	map->tilesize = WIDTH / 32; // adjust as needed
 }

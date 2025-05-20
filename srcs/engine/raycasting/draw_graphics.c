@@ -102,27 +102,21 @@ static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
 }
 static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 {
-	//int	i = 0, j;
-	int	i = 0;
-	int	bytes = vars->bits_per_pixel / 8;
-	int	image_size = vars->line_length * HEIGHT;
-	char	*dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
+	int	i;
+	int	bytes;
+	int	image_size;
+	char	*dst;
+
+	i = 0;
+	bytes = vars->bits_per_pixel / 8;
+	image_size = vars->line_length * HEIGHT;
+	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
 
 	while (i < ray->render.l_height)
 	{
 		ray->render.x_uv = calculate_x_uv(ray, vars);
 		if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
 			break;
-		//j = 0;
-		//while (j++ < 10)
-		//{
-		//	unsigned int color = *(unsigned int *)(tex + (ray->render.t_y * TEX_SIZE * bytes) + ((int)ray->render.x_uv * bytes));
-		//	if (ray->hit_dir == 1 || ray->hit_dir == 2)
-		//		color = darken_color(color, ray->hit_dir);
-		//	*(unsigned int *)dst = color;
-		//	dst += bytes;
-		//	ray->render.x_uv += ray->render.t_x_step;
-	 	//}
 		draw_strips(vars,ray,tex,dst);
 		//dst -= 10 * bytes;
 		dst += vars->line_length;

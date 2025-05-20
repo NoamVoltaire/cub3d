@@ -20,8 +20,8 @@ int	every_frame(void *param)
 	memset(vars->addr, 0, (WIDTH * HEIGHT) 
 		* (vars->bits_per_pixel / 8));
 	draw_map(vars->map, vars);
-	update_pos(&vars->player, vars->map);
-	draw_rays(vars->player, vars->map, vars);
+	update_pos(&vars->player, &vars->map);
+	draw_rays(&vars->player, &vars->map, vars);
 	// set_keyb(&vars->player.keybind);
 	// printf("forward = %d, backward = %d, left = %d, right = %d\n", vars->player.keybind.forwards, vars->player.keybind.backwards, vars->player.keybind.left, vars->player.keybind.right);
 	//printf("vars.player.xpos = %f\n", vars->player.xpos);
