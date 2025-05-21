@@ -19,14 +19,10 @@ int	every_frame(void *param)
 	vars = (t_vars *)param;
 	memset(vars->addr, 0, (WIDTH * HEIGHT) 
 		* (vars->bits_per_pixel / 8));
-	draw_map(vars->map, vars);
+	//draw_map(vars->map, vars);
 	update_pos(&vars->player, &vars->map);
+	draw_floor_ceiling(vars, vars->textures.floor, vars->textures.ceiling);
 	draw_rays(&vars->player, &vars->map, vars);
-	// set_keyb(&vars->player.keybind);
-	// printf("forward = %d, backward = %d, left = %d, right = %d\n", vars->player.keybind.forwards, vars->player.keybind.backwards, vars->player.keybind.left, vars->player.keybind.right);
-	//printf("vars.player.xpos = %f\n", vars->player.xpos);
-	//printf("vars.player.ypos = %f\n", vars->player.ypos);
-	//printf("vars.player.angle = %f\n", vars->player.angle);
 	
 	// draw_cube_player(vars->player, vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->img, 0, 0);

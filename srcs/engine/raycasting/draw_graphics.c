@@ -59,7 +59,7 @@ static float	calculate_x_uv(t_ray *ray, t_vars *vars)
 	return (x_uv);
 }
 
-static unsigned int	darken_color(unsigned int color, int dir)
+static inline unsigned int	darken_color(unsigned int color, int dir)
 {
 	int	r;
 	int	g;
@@ -106,15 +106,18 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 	int	bytes;
 	int	image_size;
 	char	*dst;
+	int	x_u;
 
 	i = 0;
 	bytes = vars->bits_per_pixel / 8;
 	image_size = vars->line_length * HEIGHT;
 	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
 
+		x_u = calculate_x_uv(ray, vars);
 	while (i < ray->render.l_height)
 	{
-		ray->render.x_uv = calculate_x_uv(ray, vars);
+
+		ray->render.x_uv = x_u; 
 		if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
 			break;
 		draw_strips(vars,ray,tex,dst);

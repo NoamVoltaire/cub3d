@@ -18,6 +18,8 @@ void	set_keyb(t_keyb *keybind)
 	keybind->backwards = false;
 	keybind->left = false;
 	keybind->right = false;
+	keybind->see_left = false;
+	keybind->see_right = false;
 }
 
 void	init_player(t_player *player)

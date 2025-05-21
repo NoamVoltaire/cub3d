@@ -10,7 +10,7 @@ void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 
 	nb_rays = 0;
 	ra = player->angle -(DR / 2 * 64);
-	while (nb_rays < 128)
+	while (nb_rays < 127)
 	{
 	if (ra < 0)
 		ra += 2 * PI;

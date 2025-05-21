@@ -40,7 +40,11 @@ typedef	struct s_textures
 	void	*we_texture;
 	void	*ea_texture;
 	char	*t_addr_no;
+	char	*t_addr_so;
+	char	*t_addr_we;
 	char	*t_addr_ea;
+	char	*floor;
+	char	*ceiling;
 }	t_texture;
 // #include <time.h>
 typedef struct s_raydraw
@@ -81,6 +85,8 @@ typedef struct s_keyb
 	bool	backwards;
 	bool	left;
 	bool	right;
+	bool	see_left;
+	bool	see_right;
 
 }		t_keyb;
 
@@ -94,6 +100,17 @@ typedef struct s_player
 	double	angle;
 
 }		t_player;
+
+typedef struct s_moveprobe
+{
+	float	xo;
+	float	yo;
+	int		mpx;
+	int		mpy;
+	int		pos_xo;
+	int		pos_yo;
+}	t_moveprobe;
+
 
 typedef struct s_vars
 {
@@ -114,7 +131,7 @@ void	init_vars(t_vars *vars);
 void	init_map(t_map *map);
 void	init_player(t_player *player);
 void	init_window(t_vars *vars);
-void	init_textures(t_vars *vars);
+void	init_textures(t_vars *vars, int floor_col, int ceiling_col);
 void	the_hooks(t_vars *vars);
 int close_window(t_vars *vars);
 int		handle_key_press(int keycode, t_vars *vars);
@@ -135,6 +152,7 @@ float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars);
 
 void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
 
+void	draw_floor_ceiling(t_vars *vars, char *floor, char *ceiling);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);
 
