@@ -1,6 +1,7 @@
 #include <cub.h>
 #define TEX_SIZE 64
 
+#include <time.h>
 
 
 
@@ -37,7 +38,7 @@ static t_raydraw	init_ray_draw_data(int l_height)
 	return (d);
 }
 
-static char	*get_texture_addr(t_ray *ray, t_vars *vars)
+static inline char	*get_texture_addr(t_ray *ray, t_vars *vars)
 {
 	if (ray->hit_dir == 0 || ray->hit_dir == 1)
 		return (vars->textures.t_addr_no);
@@ -88,11 +89,12 @@ static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
 
 	int	j = 0;
 	int	bytes = vars->bits_per_pixel / 8;
+	int	y = (ray->render.t_y * TEX_SIZE * bytes);
 	//int	image_size = vars->line_length * HEIGHT;
 
 	while(j++ < 10)
 	{
-		unsigned int color = *(unsigned int *)(tex + (ray->render.t_y * TEX_SIZE * bytes) + ((int)ray->render.x_uv * bytes));
+		unsigned int color = *(unsigned int *)(tex + (y) + ((int)ray->render.x_uv * bytes));
 		if (ray->hit_dir == 1 || ray->hit_dir == 2)
 			color = darken_color(color, ray->hit_dir);
 		*(unsigned int *)dst = color;
@@ -104,13 +106,13 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 {
 	int	i;
 	int	bytes;
-	int	image_size;
+	//int	image_size;
 	char	*dst;
 	int	x_u;
 
 	i = 0;
 	bytes = vars->bits_per_pixel / 8;
-	image_size = vars->line_length * HEIGHT;
+	//image_size = vars->line_length * HEIGHT;
 	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
 
 		x_u = calculate_x_uv(ray, vars);
@@ -118,8 +120,8 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 	{
 
 		ray->render.x_uv = x_u; 
-		if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
-			break;
+		//if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
+			//break;
 		draw_strips(vars,ray,tex,dst);
 		//dst -= 10 * bytes;
 		dst += vars->line_length;
@@ -135,7 +137,11 @@ static void	ray_to_line(int r_nb, int l_height, t_vars *vars, t_ray *ray)
 
 	ray->render = init_ray_draw_data(l_height);
 	texture = get_texture_addr(ray, vars);
+//clock_t start = clock();
+// run your function
 	draw_column_pixels(vars, ray, texture, r_nb);
+//clock_t end = clock();
+//printf("Elapsed: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 }
 
 void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars)
