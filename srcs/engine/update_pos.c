@@ -103,9 +103,20 @@ static void	move_forward(t_player *player, t_map *map, float xo, float yo)
 		player->ypos += player->ydelt / 2;
 }
 
-static void	move_backward(t_player *player)
+static void	move_backward(t_player *player, t_map *map, float xo, float yo)
 {
+	int	mpx;
+	int	mpy;
+	int	pos_xo;
+	int	pos_yo;
+
+	mpx = player->xpos / map->tilesize;
+	mpy = player->ypos / map->tilesize;
+	pos_xo = (player->xpos - xo) / map->tilesize;
+	pos_yo = (player->ypos - yo) / map->tilesize;
+	if (map->grid[mpy][pos_xo] == 0)
 	player->xpos -= player->xdelt / 4;
+	if (map->grid[pos_yo][mpx] == 0)
 	player->ypos -= player->ydelt / 4;
 }
 
@@ -118,7 +129,7 @@ void	update_pos(t_player *player, t_map *map)
 	if (player->keybind.forwards)
 		move_forward(player, map, xo, yo);
 	if (player->keybind.backwards)
-		move_backward(player);
+		move_backward(player, map, xo, yo);
 	if(player->keybind.left)
 		move_strafe_left(player, map);
 	if(player->keybind.right)

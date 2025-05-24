@@ -50,6 +50,8 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 		////printf("WEGETTHERE*****\n");
 		ray->rx = player->xpos;
 		ray->ry = player->ypos;
+		ray->xo = player->xpos;
+		ray->yo = player->ypos;
 		dof = map->tilesize;
 	}
 	else
@@ -95,6 +97,8 @@ void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra)
 		printf("WEGETTHERE*****\n");
 		ray->rx = player->xpos;
 		ray->ry = player->ypos;
+		ray->xo = player->xpos;
+		ray->yo = player->ypos;
 		dof = map->tilesize;
 	}
 	else

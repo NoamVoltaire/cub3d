@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <cub.h>
+#include <unistd.h>
 
 int	every_frame(void *param)
 {
@@ -26,5 +27,6 @@ int	every_frame(void *param)
 	
 	// draw_cube_player(vars->player, vars);
 	mlx_put_image_to_window(vars->mlx, vars->window, vars->img, 0, 0);
+	usleep(16000);
 	return (0);
 }

@@ -8,10 +8,11 @@ char	*fill_floor_ceiling_array(t_vars *vars, int color)
 	int		bytes;
 	int		i;
 
+	//row = NULL;
 	i = 0;
 	bytes = vars->bits_per_pixel / 8;
 	row = malloc(sizeof(char) * WIDTH * (vars->bits_per_pixel / 8));
-	while (i++ < WIDTH)
+	while (i++ < WIDTH - 1)
 		memcpy(row + i * bytes, &color, bytes);
 	return (row);
 }

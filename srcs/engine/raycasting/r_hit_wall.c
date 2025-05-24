@@ -7,6 +7,8 @@ float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars)
 	int	dof;
 
 	dof = 0;
+	mx = 0;
+	my = 0;
 	while (dof < 32)
 	{
 		mx = (int)ray->rx / map->tilesize;
