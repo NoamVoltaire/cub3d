@@ -52,9 +52,11 @@ static float	calculate_x_uv(t_ray *ray, t_vars *vars)
 	float	x_uv;
 
 	if (ray->hit_dir == 0 || ray->hit_dir == 2)
-		x_uv = fmod(ray->rx, vars->map.tilesize) * ((float)TEX_SIZE / vars->map.tilesize);
+		x_uv = fmod(ray->rx, vars->map.tilesize)
+			* ((float)TEX_SIZE / vars->map.tilesize);
 	else
-		x_uv = fmod(ray->ry, vars->map.tilesize) * ((float)TEX_SIZE / vars->map.tilesize);
+		x_uv = fmod(ray->ry, vars->map.tilesize)
+			* ((float)TEX_SIZE / vars->map.tilesize);
 	if (ray->hit_dir == 2 || ray->hit_dir == 3)
 		x_uv = TEX_SIZE - x_uv - 1;
 	return (x_uv);
@@ -86,15 +88,18 @@ static inline unsigned int	darken_color(unsigned int color, int dir)
 
 static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
 {
+	unsigned int	color;
+	int				j;
+	int				bytes;
+	int				y;
 
-	int	j = 0;
-	int	bytes = vars->bits_per_pixel / 8;
-	int	y = (ray->render.t_y * TEX_SIZE * bytes);
+	j = 0;
+	bytes = vars->bits_per_pixel / 8;
+	y = (ray->render.t_y * TEX_SIZE * bytes);
 	//int	image_size = vars->line_length * HEIGHT;
-
-	while(j++ < 10)
+	while (j++ < 10)
 	{
-		unsigned int color = *(unsigned int *)(tex + (y) + ((int)ray->render.x_uv * bytes));
+		color = *(unsigned int *)(tex + y + ((int)ray->render.x_uv * bytes));
 		if (ray->hit_dir == 1 || ray->hit_dir == 2)
 			color = darken_color(color, ray->hit_dir);
 		*(unsigned int *)dst = color;
@@ -106,23 +111,23 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 {
 	int	i;
 	int	bytes;
-	//int	image_size;
 	char	*dst;
 	int	x_u;
+	//int	image_size;
 
 	i = 0;
 	bytes = vars->bits_per_pixel / 8;
 	//image_size = vars->line_length * HEIGHT;
 	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
 
-		x_u = calculate_x_uv(ray, vars);
+	x_u = calculate_x_uv(ray, vars);
 	while (i < ray->render.l_height)
 	{
 
 		ray->render.x_uv = x_u; 
 		//if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
 			//break;
-		draw_strips(vars,ray,tex,dst);
+		draw_strips(vars, ray, tex, dst);
 		//dst -= 10 * bytes;
 		dst += vars->line_length;
 		i++;
