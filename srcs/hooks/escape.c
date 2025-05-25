@@ -29,9 +29,15 @@ void	delete_map(t_map *map)
 
 void	del_textures(t_vars *vars, t_texture *texture)
 {
-	mlx_destroy_image(vars->mlx, texture->t_addr_ea);
-	mlx_destroy_image(vars->mlx, texture->t_addr_no);
-	free(texture->no_texture);
+	mlx_destroy_image(vars->mlx, texture->no.addr);
+	mlx_destroy_image(vars->mlx, texture->so.addr);
+	mlx_destroy_image(vars->mlx, texture->we.addr);
+	mlx_destroy_image(vars->mlx, texture->ea.addr);
+	//mlx_destroy_image(vars->mlx, texture->t_addr_no);
+	free(texture->no.img);
+	free(texture->so.img);
+	free(texture->we.img);
+	free(texture->ea.img);
 }
 
 void	quit_everything(t_vars *vars)

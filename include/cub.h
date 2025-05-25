@@ -34,17 +34,30 @@
 # define PIII 4.71238898038
 # define DR 0.0174533
 
+typedef	struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		w;
+	int		h;
+
+}	t_tex;
 
 typedef	struct s_textures
 {
-	void	*no_texture;
-	void	*so_texture;
-	void	*we_texture;
-	void	*ea_texture;
-	char	*t_addr_no;
-	char	*t_addr_so;
-	char	*t_addr_we;
-	char	*t_addr_ea;
+//	void	*no_texture;
+//	void	*so_texture;
+//	void	*we_texture;
+//	void	*ea_texture;
+//	char	*t_addr_no;
+//	char	*t_addr_so;
+//	char	*t_addr_we;
+//	char	*t_addr_ea;
+
+	t_tex	no;
+	t_tex	so;
+	t_tex	we;
+	t_tex	ea;
 	char	*floor;
 	char	*ceiling;
 }	t_texture;

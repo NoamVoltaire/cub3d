@@ -50,27 +50,41 @@ static t_raydraw	init_ray_draw_data(int l_height)
 	return (d);
 }
 
-static inline char	*get_texture_addr(t_ray *ray, t_vars *vars)
+static inline t_tex	get_texture_addr(t_ray *ray, t_vars *vars)
 {
-	if (ray->hit_dir == 0 || ray->hit_dir == 1)
-		return (vars->textures.t_addr_no);
-	if (ray->hit_dir == 2 || ray->hit_dir == 3)
-		return (vars->textures.t_addr_ea);
-	return (NULL);
+	if (ray->hit_dir == 0)
+		return (vars->textures.no);
+	else if (ray->hit_dir == 1)
+		return (vars->textures.ea);
+	else if (ray->hit_dir == 2)
+		return (vars->textures.so);
+	else if  (ray->hit_dir == 3)
+		return (vars->textures.we);
+	else
+		return (vars->textures.no);
 }
 
-static float	calculate_x_uv(t_ray *ray, t_vars *vars)
+//static inline char	*get_texture_addr(t_ray *ray, t_vars *vars)
+//{
+//	if (ray->hit_dir == 0 || ray->hit_dir == 1)
+//		return (vars->textures.no.addr);
+//	if (ray->hit_dir == 2 || ray->hit_dir == 3)
+//		return (vars->textures.ea.addr);
+//	return (NULL);
+//}
+
+static float	calculate_x_uv(t_ray *ray, t_vars *vars, t_tex *tex)
 {
 	float	x_uv;
 
 	if (ray->hit_dir == 0 || ray->hit_dir == 2)
 		x_uv = fmod(ray->rx, vars->map.tilesize)
-			* ((float)TEX_SIZE / vars->map.tilesize);
+			* ((float)tex->w / vars->map.tilesize);
 	else
 		x_uv = fmod(ray->ry, vars->map.tilesize)
-			* ((float)TEX_SIZE / vars->map.tilesize);
+			* ((float)tex->w / vars->map.tilesize);
 	if (ray->hit_dir == 2 || ray->hit_dir == 3)
-		x_uv = TEX_SIZE - x_uv - 1;
+		x_uv = tex->w - x_uv - 1;
 	return (x_uv);
 }
 
@@ -98,7 +112,7 @@ static inline unsigned int	darken_color(unsigned int color, int dir)
 	return ((r << 16) | (g << 8) | b);
 }
 
-static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
+static void	draw_strips(t_vars *vars, t_ray *ray, t_tex *tex, char *dst)
 {
 	unsigned int	color;
 	int				j;
@@ -107,11 +121,11 @@ static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
 
 	j = 0;
 	bytes = vars->bits_per_pixel / 8;
-	y = (ray->render.t_y * TEX_SIZE * bytes);
+	y = (ray->render.t_y * tex->h * bytes);
 	//int	image_size = vars->line_length * HEIGHT;
 	while (j++ < 10)
 	{
-		color = *(unsigned int *)(tex + y + ((int)ray->render.x_uv * bytes));
+		color = *(unsigned int *)(tex->addr + y + ((int)ray->render.x_uv * bytes));
 		if (ray->hit_dir == 1 || ray->hit_dir == 2)
 			color = darken_color(color, ray->hit_dir);
 		*(unsigned int *)dst = color;
@@ -119,7 +133,7 @@ static void	draw_strips(t_vars *vars, t_ray *ray, char *tex, char *dst)
 		ray->render.x_uv += ray->render.t_x_step;
 	}
 }
-static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
+static void	draw_column_pixels(t_vars *vars, t_ray *ray, t_tex *tex, int ray_nb)
 {
 	int	i;
 	int	bytes;
@@ -132,7 +146,7 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 	//image_size = vars->line_length * HEIGHT;
 	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
 
-	x_u = calculate_x_uv(ray, vars);
+	x_u = calculate_x_uv(ray, vars, tex);
 	while (i < ray->render.l_height)
 	{
 
@@ -150,13 +164,15 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, char *tex, int ray_nb)
 
 static void	ray_to_line(int r_nb, int l_height, t_vars *vars, t_ray *ray)
 {
-	char		*texture;
+	//char		*texture;
+	t_tex		tex;
 
 	ray->render = init_ray_draw_data(l_height);
-	texture = get_texture_addr(ray, vars);
+	//texture = get_texture_addr(ray, vars);
+	tex = get_texture_addr(ray, vars);
 //clock_t start = clock();
 // run your function
-	draw_column_pixels(vars, ray, texture, r_nb);
+	draw_column_pixels(vars, ray, &tex, r_nb);
 //clock_t end = clock();
 //printf("Elapsed: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 }

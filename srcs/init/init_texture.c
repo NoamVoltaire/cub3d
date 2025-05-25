@@ -29,9 +29,10 @@ char	*fill_floor_ceiling_array(t_vars *vars, int color)
 	return (row);
 }
 
-char	*get_textures_adrr(t_vars *vars, void **img, char *path)
+t_tex	get_tex(t_vars *vars, char *path)
 {
-	char	*addr;
+	t_tex	tex;
+	//char	*addr;
 	int		bpp;
 	int		w;
 	int		h;
@@ -39,17 +40,43 @@ char	*get_textures_adrr(t_vars *vars, void **img, char *path)
 	bpp = 0;
 	w = 0;
 	h = 0;
-	img = mlx_xpm_file_to_image(vars->mlx, path, &w, &h);
+	tex.img = mlx_xpm_file_to_image(vars->mlx, path, &w, &h);
+	tex.w = w;
+	tex.h = h;
 
 	printf("Width: %d, Height: %d, bpp: %d\n", w, h, bpp);
-	if (img == NULL)
+	if (tex.img == NULL)
 	{
 		printf("Failed to load image\n");
-		return (NULL);
+		exit(1);										//TODO
+		//return (NULL);
 	}
-	addr = mlx_get_data_addr(img, &bpp, &w, &h);
-	return (addr);
+	tex.addr = mlx_get_data_addr(tex.img, &bpp, &w, &h);
+	//addr = mlx_get_data_addr(img, &bpp, &w, &h);
+	return (tex);
 }
+
+//char	*get_textures_adrr(t_vars *vars, void **img, char *path)
+//{
+//	char	*addr;
+//	int		bpp;
+//	int		w;
+//	int		h;
+//
+//	bpp = 0;
+//	w = 0;
+//	h = 0;
+//	img = mlx_xpm_file_to_image(vars->mlx, path, &w, &h);
+//
+//	printf("Width: %d, Height: %d, bpp: %d\n", w, h, bpp);
+//	if (img == NULL)
+//	{
+//		printf("Failed to load image\n");
+//		return (NULL);
+//	}
+//	addr = mlx_get_data_addr(img, &bpp, &w, &h);
+//	return (addr);
+//}
 
 //t_tex	get_tex(t_vars *vars, char *path)
 //{
@@ -64,8 +91,12 @@ void	init_textures(t_vars *vars, int floor_col, int ceiling_col)
 	char		*floor_;
 	char		*ceiling_;
 
-	texture.t_addr_no = get_textures_adrr(vars, &texture.no_texture, "./ressources/d_64.xpm");
-	texture.t_addr_ea = get_textures_adrr(vars, &texture.ea_texture, "./ressources/d_64.xpm");
+	//texture.t_addr_no = get_textures_adrr(vars, &texture.no_texture, "./ressources/d_64.xpm");
+	texture.no = get_tex(vars, "./ressources/d_126.xpm");
+	texture.so = get_tex(vars, "./ressources/d_126.xpm");
+	texture.we = get_tex(vars, "./ressources/d_64.xpm");
+	texture.ea = get_tex(vars, "./ressources/d_64.xpm");
+	//texture.t_addr_ea = get_textures_adrr(vars, &texture.ea_texture, "./ressources/d_64.xpm");
 	//need the other adresses of course
 	//also needs a function to free those images
 	//thinking of adding height and width in t_texture
