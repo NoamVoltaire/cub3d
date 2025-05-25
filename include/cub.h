@@ -22,6 +22,8 @@
 # include <stdbool.h>
 # include <string.h>
 # include <math.h>
+#include <sys/time.h>
+
 //# define HEIGHT 1880
 # define HEIGHT 940
 //# define WIDTH 2540
@@ -60,15 +62,15 @@ typedef struct s_raydraw
 
 typedef struct s_ray
 {
-	double	ra;
-	double	rx;
-	double	ry;
-	double	xo;
-	double	yo;
-	int	hit_data;
-	int	hit_dir;
-	float	hit_len;
 	t_raydraw	render;
+	double		ra;
+	double		rx;
+	double		ry;
+	double		xo;
+	double		yo;
+	int			hit_data;
+	int			hit_dir;
+	float		hit_len;
 }		t_ray;
 
 typedef struct s_map
@@ -98,6 +100,10 @@ typedef struct s_player
 	double	xdelt;
 	double	ydelt;
 	double	angle;
+	double	last_frame;
+	double	delta_time;
+	float	move_spd;
+	float	rot_spd;
 
 }		t_player;
 
@@ -140,6 +146,7 @@ int	escape(int keycode,t_vars *vars);
 int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
+double	get_time(void);
 void	update_pos(t_player *player, t_map *map);
 void	draw_rays(t_player *player, t_map *map, t_vars *vars);
 int		draw_cube_player(t_player player, t_vars *vars);

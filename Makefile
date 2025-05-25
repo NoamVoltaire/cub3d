@@ -10,7 +10,7 @@ INIT = init_vars init_player init_map init_mlx_window init_texture
 HOOKS =  the_hooks handle_keys_state escape
 ENGINE = draw_map draw_cube_player every_frame update_pos floor_ceiling
 RAYCASTING = raycasting casting r_hit_wall r_offset_calc draw_graphics
-UTILS = my_mlx_pixel_put line_drawing
+UTILS = my_mlx_pixel_put line_drawing get_time
 
 SRCS = $(addsuffix .c, $(INIT))\
 		$(addsuffix .c, $(HOOKS))\

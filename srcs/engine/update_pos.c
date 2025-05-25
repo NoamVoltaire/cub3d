@@ -27,9 +27,9 @@ static void	move_strafe_left(t_player *player, t_map *map)
 	probe.pos_xo = (player->xpos + probe.xo) / map->tilesize;
 	probe.pos_yo = (player->ypos + probe.yo) / map->tilesize;
 	if (map->grid[probe.mpy][probe.pos_xo] == 0)
-		player->xpos += str_x / 2;
+		player->xpos += str_x * player->move_spd * player->delta_time;
 	if (map->grid[probe.pos_yo][probe.mpx] == 0)
-		player->ypos += str_y / 2;
+		player->ypos += str_y * player->move_spd * player->delta_time;
 }
 
 
@@ -48,9 +48,9 @@ static void	move_strafe_right(t_player *player, t_map *map)
 	probe.pos_xo = (player->xpos + probe.xo) / map->tilesize;
 	probe.pos_yo = (player->ypos + probe.yo) / map->tilesize;
 	if (map->grid[probe.mpy][probe.pos_xo] == 0)
-		player->xpos += str_x / 2;
+		player->xpos += str_x * player->move_spd * player->delta_time;
 	if (map->grid[probe.pos_yo][probe.mpx] == 0)
-		player->ypos += str_y / 2;
+		player->ypos += str_y * player->move_spd * player->delta_time;
 }
 
 
@@ -72,13 +72,16 @@ static void	handle_rotation(t_player *player)
 {
 	if (player->keybind.see_left)
 	{
-		player->angle -= 0.04;
+		//player->angle -= 0.04;
+		player->angle -= player->rot_spd * player->delta_time;
 		if (player->angle < 0)
 			player->angle += 2 * PI;
 	}
 	if (player->keybind.see_right)
 	{
-		player->angle += 0.04;
+		//player->angle += 0.04;
+		player->angle += player->rot_spd * player->delta_time;
+		if (player->angle < 0)
 		if (player->angle > 2 * PI)
 			player->angle -= 2 * PI;
 	}
@@ -98,9 +101,11 @@ static void	move_forward(t_player *player, t_map *map, float xo, float yo)
 	pos_xo = (player->xpos + xo) / map->tilesize;
 	pos_yo = (player->ypos + yo) / map->tilesize;
 	if (map->grid[mpy][pos_xo] == 0)
-		player->xpos += player->xdelt / 2;
+		player->xpos += player->xdelt * player->delta_time * player->move_spd;
+		//player->xpos += player->xdelt / 2;
 	if (map->grid[pos_yo][mpx] == 0)
-		player->ypos += player->ydelt / 2;
+		player->ypos += player->ydelt * player->delta_time * player->move_spd;
+		//player->ypos += player->ydelt / 2;
 }
 
 static void	move_backward(t_player *player, t_map *map, float xo, float yo)
@@ -115,16 +120,28 @@ static void	move_backward(t_player *player, t_map *map, float xo, float yo)
 	pos_xo = (player->xpos - xo) / map->tilesize;
 	pos_yo = (player->ypos - yo) / map->tilesize;
 	if (map->grid[mpy][pos_xo] == 0)
-	player->xpos -= player->xdelt / 4;
+		player->xpos -= player->xdelt * player->delta_time * player->move_spd;
+	//player->xpos -= player->xdelt / 4;
 	if (map->grid[pos_yo][mpx] == 0)
-	player->ypos -= player->ydelt / 4;
+		player->ypos -= player->ydelt * player->delta_time * player->move_spd;
+	//player->ypos -= player->ydelt / 4;
 }
 
+void	get_delta_time(t_player *player)
+{
+	double current_time;
+
+	current_time = get_time();
+	player->delta_time = current_time - player->last_frame;
+	player->last_frame = current_time;
+}
 void	update_pos(t_player *player, t_map *map)
 {
 	float	xo;
 	float	yo;
 
+	get_delta_time(player);
+	//printf("delat = %f\n", player->delta_time);
 	calc_offset(player, &xo, &yo);
 	if (player->keybind.forwards)
 		move_forward(player, map, xo, yo);

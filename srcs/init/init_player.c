@@ -29,5 +29,8 @@ void	init_player(t_player *player)
 	player->angle = 0 ;
 	player->xdelt = cos(player->angle) * 5;
 	player->ydelt = sin(player->angle) * 5;
+	player->move_spd = 15;
+	player->rot_spd = 2.5;
 	set_keyb(&player->keybind);
+	player->last_frame = get_time();
 }
