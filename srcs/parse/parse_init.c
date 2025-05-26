@@ -19,6 +19,7 @@ size_t	longest_row(t_list *lst)
 
 int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 {
+
 	size_t cols;
 	size_t rows;
 	char	*line;
@@ -27,6 +28,7 @@ int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 	size_t	j;
 
 	(void)vars;
+	//		NEED FUNCTION FOR ALLOC
 	i = 0;
 	j = 0;
 	while (lst && !is_map_line(lst->content))
@@ -49,6 +51,7 @@ int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 		{
 			if (line[j] == '\0')
 				line [j] = '1';
+			//	NEED FUNCTION FOR SETTING PLAYER
 			if (line[j] == 'N' || line[j] == 'S' || line[j] == 'W' || line[j] == 'E')
 			{
 				parse->playerxpos = (j * WIDTH / 32) + (WIDTH /32 /2);
@@ -62,6 +65,7 @@ int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 			}
 			else if (line[j] == ' ')
 				line[j] = '1';
+			//	THIS IS A QUICKFIX BUT NEEDS FLOOD FILL BEFORE
 
 			map_tab_array[i][j] = line[j] - '0';
 
@@ -123,19 +127,20 @@ static void	set_rgb_colors(char *line, int color_arr[4])
 	int		count;
 	int		j;
 
-	printf("line = = = %s\n", line);
+	//printf("line = = = %s\n", line);
 	j = 0;
 	rgb_to_convert = ft_split(line, ',');
 	count = 0;
 	while (rgb_to_convert[count])
 		count++;
-	    for (j = 0; j < count; j++)
-        printf("Token %d: '%s'\n", j, rgb_to_convert[j]);
-	j = 0;
+	    //for (j = 0; j < count; j++)
+        //printf("Token %d: '%s'\n", j, rgb_to_convert[j]);
+	//j = 0;
 	if (count != 3)
 	{
 		free_tab(rgb_to_convert);
 		//return (0);
+		printf("wrong nb of args%s\n", line);
 		return ;
 	}
 	while (j < 3)
@@ -157,29 +162,31 @@ static void	set_rgb_colors(char *line, int color_arr[4])
 int	line_into_color_textures(t_parse *parse, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
-				printf ("GOOFY\n");
-		//return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
-	printf("c_color_input[3] = %d, line[%d] = '%c'\n", parse->c_color_input[3], j, line[j]);
+	{
+					//printf ("GOOFY\n");
+			//return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
+			//printf("c_color_input[3] = %d, line[%d] = '%c'\n", parse->c_color_input[3], j, line[j]);
 
-	if (parse->c_color_input[3] == 0 && line[j] == 'C')
-	{
-		set_rgb_colors(line + j + 1, parse->c_color_input);
-		//parse->c_color_input = set_rgb_colors(line + j + 1, parse->c_color_input);
-		if (parse->c_color_input[3] == 0)
-				printf ("we didn't put an error for colors failing \n");
-			//return (err_msg(data->mapinfo.path, ERR_COLOR_CEILING, ERR));
-	}
-	else if (parse->f_color_input[3] == 0 && line[j] == 'F')
-	{
-				printf ("AAAAAH\n");
-		set_rgb_colors(line + j + 1, parse->f_color_input);
-		//parse->f_color_input = set_rgb_colors(line + j + 1, parse->f_color_input);
-		if (parse->f_color_input[3]== 0)
-				printf ("we didn't put an error for colors failing \n");
-			//return (err_msg(data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
+		if (parse->c_color_input[3] == 0 && line[j] == 'C')
+		{
+			set_rgb_colors(line + j + 1, parse->c_color_input);
+			//parse->c_color_input = set_rgb_colors(line + j + 1, parse->c_color_input);
+			if (parse->c_color_input[3] == 0)
+					printf ("not valid color\n");
+				//return (err_msg(data->mapinfo.path, ERR_COLOR_CEILING, ERR));
+		}
+		else if (parse->f_color_input[3] == 0 && line[j] == 'F')
+		{
+					//printf ("AAAAAH\n");
+			set_rgb_colors(line + j + 1, parse->f_color_input);
+			//parse->f_color_input = set_rgb_colors(line + j + 1, parse->f_color_input);
+			if (parse->f_color_input[3]== 0)
+					printf ("not valid color\n");
+				//return (err_msg(data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
+		}
 	}
 	else
-				printf ("we didn't put an error for colors failing \n");
+				printf ("error floor ceiling args\n");
 		//return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
 	return (0);
 }
@@ -203,8 +210,8 @@ static char	*get_texture_path(char *line, int j)
 	while (line[j] && (line[j] != ' ' && line[j] != '\t' && line[j] != '\n'))
 		path[i++] = line[j++];
 	path[i] = '\0';
-				printf ("uhhh %s\n", (path));
-				printf ("uhhh %s\n", (path));
+				//printf ("uhhh %s\n", (path));
+				//printf ("uhhh %s\n", (path));
 	while (line[j] && (line[j] == ' ' || line[j] == '\t'))
 		j++;
 	if (line[j] && line[j] != '\n')
@@ -253,8 +260,10 @@ int	ignore_space_get_info(char *line, t_parse *parse)
 		else if (line[j + 1] && ft_isprint(line[j + 1]) && !ft_isdigit(line[j+1])) 
 		{
 			if (line_into_texture_path(line, parse, j))
+			{
 				printf ("we didn't put an error for texturepath failing \n");
-				printf ("sooo %s\n", (line +j));
+				printf ("line is %s\n", (line +j));
+			}
 		}
 	}
 		
@@ -280,76 +289,76 @@ void	initialize_vars(t_list *lst, t_parse *parse)
 		if (lst->content && !is_map_line(lst->content))
 		{
 			if (ignore_space_get_info(lst->content, parse))
-				printf("we didn't put an error for colors failing \n");
+				printf("error in line\n");
 		}
 		lst = lst->next;
 	}
 
-	printf(" AYYYYY %d, %d, %d \n ", parse->f_color_input[0],parse->f_color_input[1], parse->f_color_input[2]);  
-	printf(" YAAAAAAAA %d, %d, %d \n ", parse->c_color_input[0],parse->c_color_input[1], parse->c_color_input[2]);  
+//	printf(" AYYYYY %d, %d, %d \n ", parse->f_color_input[0],parse->f_color_input[1], parse->f_color_input[2]);  
+//	printf(" YAAAAAAAA %d, %d, %d \n ", parse->c_color_input[0],parse->c_color_input[1], parse->c_color_input[2]);  
 		
 }
-void init_t_parse(t_list *lines, t_parse *parse)
-{
-	t_list *ptr;
-	char	*line;
-	char	*newline;
-	int	i;
-
-	ptr = lines;
-	i = 0;
-	while (ptr && i < 4)
-	{
-		//need to skip if space
-		line = ft_strdup((char *)ptr->content + 3);
-		//after "NO "
-		newline = strchr(line, '\n');
-		if (newline)
-			*newline = 0;
-		parse->t_paths[i] = line;
-		ptr = ptr->next;
-		i++;
-		
-	}
-}
-void	init_f_c_parse(t_list *lines, t_parse *parse)
-{
-	t_list *ptr;
-	char	*line;
-	//char	*newline;
-	int	i;
-	int	j;
-	int	is_f_flag;
-
-	i = 0;
-	j = 0;
-	is_f_flag = 1;
-	ptr = lines;
-	while (ptr && i < 7)
-	{
-		j = 0;
-		if (!strchr(ptr->content, 'F') && !strchr(ptr->content, 'C'))
-		{
-			ptr = ptr->next;
-			i++;
-			continue;
-		}
-		line = ptr->content + 1;
-		//printf("hahah %s\n", line);
-		while (j < 3)
-		{
-			if (is_f_flag)
-				parse->f_color_input[j] = ft_atoi(line);
-			else 
-				parse->c_color_input[j] = ft_atoi(line);
-			line = ft_strchr(line, ',') + 1;
-			j++;
-		}
-		is_f_flag = 0;
-		ptr = ptr->next;
-		i++;
-	}
-	//printf(" AYYYYY %d, %d, %d \n ", parse->f_color_input[0],parse->f_color_input[1], parse->f_color_input[2]);  
-	//printf(" YAAAAAAAA %d, %d, %d \n ", parse->c_color_input[0],parse->c_color_input[1], parse->c_color_input[2]);  
-
-}
+//void init_t_parse(t_list *lines, t_parse *parse)
+//{
+//	t_list *ptr;
+//	char	*line;
+//	char	*newline;
+//	int	i;
+//
+//	ptr = lines;
+//	i = 0;
+//	while (ptr && i < 4)
+//	{
+//		//need to skip if space
+//		line = ft_strdup((char *)ptr->content + 3);
+//		//after "NO "
+//		newline = strchr(line, '\n');
+//		if (newline)
+//			*newline = 0;
+//		parse->t_paths[i] = line;
+//		ptr = ptr->next;
+//		i++;
+//		
+//	}
+//}
+//void	init_f_c_parse(t_list *lines, t_parse *parse)
+//{
+//	t_list *ptr;
+//	char	*line;
+//	//char	*newline;
+//	int	i;
+//	int	j;
+//	int	is_f_flag;
+//
+//	i = 0;
+//	j = 0;
+//	is_f_flag = 1;
+//	ptr = lines;
+//	while (ptr && i < 7)
+//	{
+//		j = 0;
+//		if (!strchr(ptr->content, 'F') && !strchr(ptr->content, 'C'))
+//		{
+//			ptr = ptr->next;
+//			i++;
+//			continue;
+//		}
+//		line = ptr->content + 1;
+//			//printf("hahah %s\n", line);
+//		while (j < 3)
+//		{
+//			if (is_f_flag)
+//				parse->f_color_input[j] = ft_atoi(line);
+//			else 
+//				parse->c_color_input[j] = ft_atoi(line);
+//			line = ft_strchr(line, ',') + 1;
+//			j++;
+//		}
+//		is_f_flag = 0;
+//		ptr = ptr->next;
+//		i++;
+//	}
+//	//printf(" AYYYYY %d, %d, %d \n ", parse->f_color_input[0],parse->f_color_input[1], parse->f_color_input[2]);  
+//	//printf(" YAAAAAAAA %d, %d, %d \n ", parse->c_color_input[0],parse->c_color_input[1], parse->c_color_input[2]);  
+//
+//}
