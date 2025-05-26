@@ -49,9 +49,12 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 clean:
+	make clean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
+	rm -f $(LIBFT)
 	rm -f $(NAME)
 
 re: fclean $(NAME)
