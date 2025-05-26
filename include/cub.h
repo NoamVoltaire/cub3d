@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/19 12:46:48 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/26 08:17:23 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef	struct s_textures
 	void	*ea_texture;
 	char	*t_addr_no;
 	char	*t_addr_ea;
-}	t_texture;
+}	t_textures;
 // #include <time.h>
 typedef struct s_ray
 {

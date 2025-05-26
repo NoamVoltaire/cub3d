@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:15:50 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/19 14:26:55 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:09:46 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] != '\n')
+	while (line[i] && line[i] != '\n')
 	{
 		if (!ft_strchr("01 NSEW", line[i]))
 			return (false);
@@ -76,7 +76,7 @@ int	check_input_syntax(t_list *input)
 
 int	parse_into_vars(int fd, t_vars *vars)
 {
-	t_list	*lines;
+	t_list		*lines;
 
 	lines = get_lines(fd);
 	if (close(fd) == -1)
