@@ -158,7 +158,7 @@
 
 
 
-void	init_map(t_map *map)
+void	init_map(t_map *map, t_parse *parse)
 {
 	int	y;
 	int	x;
@@ -199,8 +199,12 @@ void	init_map(t_map *map)
 		for (x = 0; x < 32; x++)
 			map->grid[y][x] = map_data[y][x];
 	}
-
-	map->mapx = 32;
-	map->mapy = 32;
-	map->tilesize = WIDTH / 32; // adjust as needed
+	
+	//map->mapx = 32;
+	//map->mapy = 32;
+	//
+	map->grid = parse->tab;
+	map->mapx = parse->m_w;
+	map->mapy = parse->m_h;
+	map->tilesize = TILE_SIZE; // adjust as needed
 }

@@ -11,67 +11,6 @@
 /* ************************************************************************** */
 
 #include <cub.h>
-#define TEX_SIZE 64
-
-#include <time.h>
-
-
-
-//typedef struct s_raydraw {
-//	float	t_y_step;
-//	float	t_x_step;
-//	float	y_uv;
-//	int		t_y;
-//	int		l_height;
-//	int		y;
-//}	t_raydraw;
-
-static t_raydraw	init_ray_draw_data(int l_height, t_tex *tex)
-{
-	t_raydraw	d;
-	float		ty_off;
-
-	ty_off = 0;
-	d.t_y_step = (float)tex->h / l_height;
-	d.t_x_step = ((float)tex->w / l_height) + 0.01;
-	//here we calculate the step distance to walk the texture, using l_height
-	if (l_height > HEIGHT)
-	{
-		ty_off = (l_height - HEIGHT) / 2.0;
-		l_height = HEIGHT;
-	}
-	d.y_uv = ty_off * d.t_y_step;
-	//this whole ty_off thing is if column larger than HEIGHT , then
-	//truncate and apply y offest on texture
-	d.t_y = (int)(ty_off * d.t_y_step);
-	d.l_height = l_height;
-	d.y = (HEIGHT / 2) - l_height / 2;
-	// Get pointer to first pixel in of the column in the image buffer
-	return (d);
-}
-
-static inline t_tex	get_texture_addr(t_ray *ray, t_vars *vars)
-{
-	if (ray->hit_dir == 0)
-		return (vars->textures.no);
-	else if (ray->hit_dir == 1)
-		return (vars->textures.ea);
-	else if (ray->hit_dir == 2)
-		return (vars->textures.so);
-	else if  (ray->hit_dir == 3)
-		return (vars->textures.we);
-	else
-		return (vars->textures.no);
-}
-
-//static inline char	*get_texture_addr(t_ray *ray, t_vars *vars)
-//{
-//	if (ray->hit_dir == 0 || ray->hit_dir == 1)
-//		return (vars->textures.no.addr);
-//	if (ray->hit_dir == 2 || ray->hit_dir == 3)
-//		return (vars->textures.ea.addr);
-//	return (NULL);
-//}
 
 static float	calculate_x_uv(t_ray *ray, t_vars *vars, t_tex *tex)
 {
@@ -88,30 +27,6 @@ static float	calculate_x_uv(t_ray *ray, t_vars *vars, t_tex *tex)
 	return (x_uv);
 }
 
-static inline unsigned int	darken_color(unsigned int color, int dir)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (color >> 16) & 0xFF;
-	g = (color >> 8) & 0xFF;
-	b = color & 0xFF;
-	if (dir == 1)
-	{
-		r = r / 1.2;
-		g = g / 1.2;
-		b = b / 1.2;
-	}
-	else if (dir == 2)
-	{
-		r >>= 1;
-		g >>= 1;
-		b >>= 1;
-	}
-	return ((r << 16) | (g << 8) | b);
-}
-
 static void	draw_strips(t_vars *vars, t_ray *ray, t_tex *tex, char *dst)
 {
 	unsigned int	color;
@@ -122,10 +37,10 @@ static void	draw_strips(t_vars *vars, t_ray *ray, t_tex *tex, char *dst)
 	j = 0;
 	bytes = vars->bits_per_pixel / 8;
 	y = (ray->render.t_y * tex->h * bytes);
-	//int	image_size = vars->line_length * HEIGHT;
 	while (j++ < 10)
 	{
-		color = *(unsigned int *)(tex->addr + y + ((int)ray->render.x_uv * bytes));
+		color = *(unsigned int *)(tex->addr + y
+				+ ((int)ray->render.x_uv * bytes));
 		if (ray->hit_dir == 1 || ray->hit_dir == 2)
 			color = darken_color(color, ray->hit_dir);
 		*(unsigned int *)dst = color;
@@ -133,28 +48,25 @@ static void	draw_strips(t_vars *vars, t_ray *ray, t_tex *tex, char *dst)
 		ray->render.x_uv += ray->render.t_x_step;
 	}
 }
+
 static void	draw_column_pixels(t_vars *vars, t_ray *ray, t_tex *tex, int ray_nb)
 {
-	int	i;
-	int	bytes;
 	char	*dst;
-	int	x_u;
-	//int	image_size;
+	int		i;
+	int		bytes;
+	int		x_u;
 
 	i = 0;
 	bytes = vars->bits_per_pixel / 8;
-	//image_size = vars->line_length * HEIGHT;
-	dst = vars->addr + (ray->render.y * vars->line_length) + (ray_nb * 10 * bytes);
-
+	dst = vars->addr + (ray->render.y * vars->line_length)
+		+ (ray_nb * 10 * bytes);
 	x_u = calculate_x_uv(ray, vars, tex);
 	while (i < ray->render.l_height)
 	{
-
 		ray->render.x_uv = x_u; 
 		//if (dst < vars->addr || dst + (10 * bytes) > vars->addr + image_size)
 			//break;
 		draw_strips(vars, ray, tex, dst);
-		//dst -= 10 * bytes;
 		dst += vars->line_length;
 		i++;
 		ray->render.y_uv += ray->render.t_y_step;
@@ -164,17 +76,11 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, t_tex *tex, int ray_nb)
 
 static void	ray_to_line(int r_nb, int l_height, t_vars *vars, t_ray *ray)
 {
-	//char		*texture;
 	t_tex		tex;
 
-	//texture = get_texture_addr(ray, vars);
 	tex = get_texture_addr(ray, vars);
 	ray->render = init_ray_draw_data(l_height, &tex);
-//clock_t start = clock();
-// run your function
 	draw_column_pixels(vars, ray, &tex, r_nb);
-//clock_t end = clock();
-//printf("Elapsed: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 }
 
 void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars)
@@ -184,9 +90,6 @@ void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars)
 	line_height = (vars->map.tilesize * HEIGHT / ray->hit_len);
 	ray_to_line(ray_nb, (int)line_height, vars, ray);
 }
-
-
-
 
 //static void	ray_to_line(int r_nb, int l_height, t_vars *vars, t_ray ray)
 //{
@@ -275,7 +178,7 @@ void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars)
 //			//x_uv += (DR / 10.0);
 //		}
 //		dst -= (10 * bytes_per_pixel);
-//		//memcpy(dst, color_array, 10 * bytes_per_pixel); // Copy 8 pixels at once
+//		//memcpy(dst, color_array, 10 * bytes_per_pixel);
 //		dst += vars->line_length; // Move to next row
 //		i++;
 //		y_uv += t_y_step;

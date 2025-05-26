@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   the_hooks.c                                        :+:      :+:    :+:   */
+/*   escape.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:10:22 by noam              #+#    #+#             */
-/*   Updated: 2025/04/22 16:10:46 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/26 17:22:59 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	delete_map(t_map *map)
 	int	i;
 
 	i = 0;
-	while(i < map->mapy)
+	while (i < map->mapy)
 	{
 		free(map->grid[i]);
 		i++;
@@ -52,7 +52,7 @@ void	quit_everything(t_vars *vars)
 	exit(0);
 }
 
-int escape(int keycode, t_vars *vars)
+int	escape(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Escape)
 	{

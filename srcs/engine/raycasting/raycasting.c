@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:34:19 by noam              #+#    #+#             */
-/*   Updated: 2025/05/25 14:36:00 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/26 17:59:54 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 
 	nb_rays = 0;
 	ra = player->angle -(DR / 2 * 64);
-	while (nb_rays < 127)
+	while (nb_rays < 128)
 	{
 		if (ra < 0)
 			ra += 2 * PI;
 		if (ra > 2 * PI)
 			ra -= 2 * PI;
-		//printf("THE value of ray.hitlen = %f\n", ray.hit_len);
 		ray = casting(player, map, vars, ra);
 		ra += DR / 2;
 		nb_rays++;

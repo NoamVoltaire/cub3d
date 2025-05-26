@@ -36,7 +36,8 @@
 //# define HEIGHT 1880
 # define HEIGHT 940
 //# define WIDTH 2540
-# define WIDTH 1270
+# define WIDTH 1280
+# define TILE_SIZE 64  
 # define PI 3.141592653589793//23846
 # define tPI 6.28318530718
 # define PII 1.57079632679
@@ -201,8 +202,9 @@ int	**lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse);
 int	check_args_before_map(t_list *lines);
 
 void	init_vars(t_vars *vars);
-void	init_map(t_map *map);
-void	init_player(t_player *player);
+//void	init_map(t_map *map);
+void	init_map(t_map *map, t_parse *parse);
+void	init_player(t_player *player, t_parse *parse);
 void	init_window(t_vars *vars);
 void	init_textures(t_vars *vars, int floor_col, int ceiling_col);
 void	the_hooks(t_vars *vars);
@@ -214,7 +216,12 @@ int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
 double	get_time(void);
+
 void	update_pos(t_player *player, t_map *map);
+void	handle_rotation(t_player *player);
+void	move_strafe_left(t_player *player, t_map *map);
+void	move_strafe_right(t_player *player, t_map *map);
+
 void	draw_rays(t_player *player, t_map *map, t_vars *vars);
 int		draw_cube_player(t_player player, t_vars *vars);
 
@@ -226,7 +233,12 @@ float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars);
 
 void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
 
+t_raydraw	init_ray_draw_data(int l_height, t_tex *tex);
+t_tex	get_texture_addr(t_ray *ray, t_vars *vars);
+unsigned int	darken_color(unsigned int color, int dir);
+
 void	draw_floor_ceiling(t_vars *vars, char *floor, char *ceiling);
+
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);
 

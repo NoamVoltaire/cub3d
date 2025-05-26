@@ -22,10 +22,12 @@ void	set_keyb(t_keyb *keybind)
 	keybind->see_right = false;
 }
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_parse *parse)
 {
-	player->xpos = WIDTH / 2;
-	player->ypos = HEIGHT / 2;
+	//player->xpos = WIDTH / 2;
+	//player->ypos = HEIGHT / 2;
+	player->xpos = parse->playerxpos;
+	player->ypos = parse->playerypos;
 	player->angle = 0 ;
 	player->xdelt = cos(player->angle) * 5;
 	player->ydelt = sin(player->angle) * 5;

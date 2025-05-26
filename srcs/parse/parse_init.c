@@ -54,8 +54,8 @@ int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 			//	NEED FUNCTION FOR SETTING PLAYER
 			if (line[j] == 'N' || line[j] == 'S' || line[j] == 'W' || line[j] == 'E')
 			{
-				parse->playerxpos = (j * WIDTH / 32) + (WIDTH /32 /2);
-				parse->playerypos = (i * WIDTH / 32) + (WIDTH /32 /2);
+				parse->playerxpos = (j * TILE_SIZE) + (TILE_SIZE / 2);
+				parse->playerypos = (i * TILE_SIZE) + (TILE_SIZE / 2);
 				//parse->playerxpos = (j * parse->m_w) + (parse->m_w / 2);
 				//parse->playerypos = (i * parse->m_w) + (parse->m_w / 2);
 				printf("Player found at map[%zu][%d], setting position to %f, %f\n",
