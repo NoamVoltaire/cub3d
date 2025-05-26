@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/26 09:16:26 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:18:31 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ typedef	struct s_textures
 	char	*floor;
 	char	*ceiling;
 }	t_texture;
->>>>>>> main
-// #include <time.h>
+
 typedef struct s_raydraw
 {
 	float	t_y_step;
@@ -166,7 +165,7 @@ typedef struct s_vars
 
 }		t_vars;
 
-int		main_loop(t_vars vars);
+int		main_loop(t_vars *vars);
 
 //PARSING
 int		print_error_msg(char *msg);

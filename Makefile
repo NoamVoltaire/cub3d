@@ -35,7 +35,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 #  echo :
 # 	  @echo $(OBJ)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(MLX) $(OBJ) $(LIBFT) 
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 
 $(OBJ_DIR)%.o: %.c $(HDR)

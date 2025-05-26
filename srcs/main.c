@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:28:08 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/26 08:24:07 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:18:55 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	main(int ac, char **av)
 	ft_bzero(&vars, sizeof (t_vars));
 	if (parse_into_vars(fd, &vars))
 		return (1);
-	return (main_loop(vars));
+	return (main_loop(&vars));
 }
