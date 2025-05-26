@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/16 00:13:11 by noam              #+#    #+#             */
-/*   Updated: 2025/03/16 00:15:59 by noam             ###   ########.fr       */
+/*   Created: 2025/05/25 14:33:04 by noam              #+#    #+#             */
+/*   Updated: 2025/05/25 14:33:07 by noam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub.h>
 
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
+double	get_time(void)
 {
-	char	*dst;
+	struct timeval	t;
 
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return ;
-	dst = vars->addr + (y * vars->line_length + x * (vars->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	gettimeofday(&t, NULL);
+	return (t.tv_sec + t.tv_usec / 1000000.0);
 }

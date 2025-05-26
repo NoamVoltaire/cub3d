@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_drawing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/25 14:32:42 by noam              #+#    #+#             */
+/*   Updated: 2025/05/25 14:32:48 by noam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub.h>
 
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1) 
@@ -26,7 +38,7 @@ void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1)
 		//printf("x0 = %d\n y0 = %d\n", x0, y0);
 		my_mlx_pixel_put(vars, x0, y0,03770000);
 
-		if ((x0 == x1 && y0 == y1) || x0 == 1 || y0 == 1 || x0 > (WIDTH / 2) || y0 > (HEIGHT / 2))
+		if ((x0 == x1 && y0 == y1) || x0 == 1 || y0 == 1 || x0 > WIDTH || y0 > HEIGHT)
 			break;
 		if (err * 2 > -dy)
 		{

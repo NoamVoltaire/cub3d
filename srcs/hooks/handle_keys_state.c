@@ -22,6 +22,10 @@ int	handle_key_press(int keycode, t_vars *vars)
 		vars->player.keybind.left = true;
 	if (keycode == XK_d)
 		vars->player.keybind.right = true;
+	if (keycode == XK_Right)
+		vars->player.keybind.see_right = true;
+	if (keycode == XK_Left)
+		vars->player.keybind.see_left = true;
 	if (keycode == 65307)
 		close_window(vars);
 	return (0);
@@ -37,5 +41,9 @@ int	handle_key_release(int keycode, t_vars *vars)
 		vars->player.keybind.left = false;
 	if (keycode == XK_d)
 		vars->player.keybind.right = false;
+	if (keycode == XK_Right)
+		vars->player.keybind.see_right = false;
+	if (keycode == XK_Left)
+		vars->player.keybind.see_left = false;
 	return (0);
 }
