@@ -26,14 +26,14 @@
 //	int		y;
 //}	t_raydraw;
 
-static t_raydraw	init_ray_draw_data(int l_height)
+static t_raydraw	init_ray_draw_data(int l_height, t_tex *tex)
 {
 	t_raydraw	d;
 	float		ty_off;
 
 	ty_off = 0;
-	d.t_y_step = (float)TEX_SIZE / l_height;
-	d.t_x_step = ((float)TEX_SIZE / l_height) + 0.01;
+	d.t_y_step = (float)tex->h / l_height;
+	d.t_x_step = ((float)tex->w / l_height) + 0.01;
 	//here we calculate the step distance to walk the texture, using l_height
 	if (l_height > HEIGHT)
 	{
@@ -167,9 +167,9 @@ static void	ray_to_line(int r_nb, int l_height, t_vars *vars, t_ray *ray)
 	//char		*texture;
 	t_tex		tex;
 
-	ray->render = init_ray_draw_data(l_height);
 	//texture = get_texture_addr(ray, vars);
 	tex = get_texture_addr(ray, vars);
+	ray->render = init_ray_draw_data(l_height, &tex);
 //clock_t start = clock();
 // run your function
 	draw_column_pixels(vars, ray, &tex, r_nb);

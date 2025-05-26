@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 15:13:33 by noam              #+#    #+#             */
-/*   Updated: 2025/03/21 17:18:27 by noam             ###   ########.fr       */
+/*   Created: 2025/05/14 13:28:08 by lgrellie          #+#    #+#             */
+/*   Updated: 2025/05/17 15:44:12 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub.h>
-
-int	main_loop(t_vars *vars)
-{
-	//t_vars	vars;
-
-	init_vars(vars);
-	the_hooks(vars);
-	//if (!vars.textures.t_addr)  // Exit function early to prevent crash
-		 //printf("ITSNULLLLLLLLLL");
-		// printf("vars.player.xpos = %f\n", vars.player.xpos);
-	mlx_loop_hook(vars->mlx, every_frame, vars);
-	mlx_loop(vars->mlx);
-	return (0);
-}
+#include "cub.h"
 
 int	check_map_name(char *str)
 {
@@ -51,5 +37,5 @@ int	main(int ac, char **av)
 		perror("cub3D");
 	if (parse_into_vars(fd, &vars))
 		return (1);
-	return (main_loop(&vars));
+	return (main_loop(vars));
 }

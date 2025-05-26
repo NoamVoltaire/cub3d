@@ -13,6 +13,13 @@
 #ifndef CUB_H
 # define CUB_H
 
+# define BUFFER_SIZE 42
+# define FD_MAX 1024
+# define GNL_SUCCESS 0
+# define GNL_EOF 1
+# define GNL_ESYS -1
+# define GNL_ERANGE -2
+
 # include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,8 +29,10 @@
 # include <stdbool.h>
 # include <string.h>
 # include <math.h>
+# include <fcntl.h>
+#include <stdio.h>
 #include <sys/time.h>
-
+#include "../libft/libft.h"
 //# define HEIGHT 1880
 # define HEIGHT 940
 //# define WIDTH 2540
@@ -33,6 +42,33 @@
 # define PII 1.57079632679
 # define PIII 4.71238898038
 # define DR 0.0174533
+
+typedef struct s_gnl
+{
+	char	*save;
+	char	*tmp_save;
+	char	**line;
+	int		fd;
+}	t_gnl;
+
+typedef struct s_parse
+{
+	int	**tab;
+	int	m_w;
+	int	m_h;
+	double	playerxpos;
+	double	playerypos;
+	double	p_angle;
+	char	*t_paths[4];
+	int f_color_input[4];
+	int c_color_input[4];
+	//char	*
+	
+	//char	*no_path;
+	//char	*so_path;
+	//char	*we_path;
+	//char	*ea_path;
+}	t_parse;
 
 typedef	struct s_tex
 {
@@ -143,8 +179,26 @@ typedef struct s_vars
 	t_map		map;
 	t_player	player;
 	t_texture	textures;
+	t_parse		parse;
 
 }		t_vars;
+
+//int            main_loop(t_vars vars);
+
+//PARSING
+int            print_error_msg(char *msg);
+int            parse_into_vars(int fd, t_vars *vars);
+int            next_gnl(char **line, int fd);
+bool	is_map_line(char *line);
+
+void	init_f_c_parse(t_list *lines, t_parse *parse);
+void	init_t_parse(t_list *lines, t_parse *parse);
+
+
+void	initialize_vars(t_list *lst, t_parse *parse);
+
+int	**lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse);
+int	check_args_before_map(t_list *lines);
 
 void	init_vars(t_vars *vars);
 void	init_map(t_map *map);

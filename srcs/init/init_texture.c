@@ -92,10 +92,14 @@ void	init_textures(t_vars *vars, int floor_col, int ceiling_col)
 	char		*ceiling_;
 
 	//texture.t_addr_no = get_textures_adrr(vars, &texture.no_texture, "./ressources/d_64.xpm");
-	texture.no = get_tex(vars, "./ressources/d_126.xpm");
-	texture.so = get_tex(vars, "./ressources/d_126.xpm");
-	texture.we = get_tex(vars, "./ressources/d_64.xpm");
-	texture.ea = get_tex(vars, "./ressources/d_64.xpm");
+	//texture.no = get_tex(vars, "./ressources/d_126.xpm");
+	texture.no = get_tex(vars, vars->parse.t_paths[0]);
+	texture.so = get_tex(vars, vars->parse.t_paths[1]);
+	texture.we = get_tex(vars, vars->parse.t_paths[2]);
+	texture.ea = get_tex(vars, vars->parse.t_paths[3]);
+	//texture.so = get_tex(vars, "./ressources/d_126.xpm");
+	//texture.we = get_tex(vars, "./ressources/d_64.xpm");
+	//texture.ea = get_tex(vars, "./ressources/d_64.xpm");
 	//texture.t_addr_ea = get_textures_adrr(vars, &texture.ea_texture, "./ressources/d_64.xpm");
 	//need the other adresses of course
 	//also needs a function to free those images
