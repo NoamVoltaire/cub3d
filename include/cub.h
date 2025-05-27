@@ -200,7 +200,7 @@ void	init_t_parse(t_list *lines, t_parse *parse);
 
 void	initialize_vars(t_list *lst, t_parse *parse);
 
-int	**lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse);
+int	**lst_to_int_map(t_list *lst, t_parse *parse);
 int	check_args_before_map(t_list *lines);
 
 void	init_vars(t_vars *vars);

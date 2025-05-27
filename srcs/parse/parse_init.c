@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <cub.h>
 #include <string.h>
 
@@ -72,13 +73,21 @@ static void handle_player_char(char dir, size_t x, size_t y, t_parse *parse)
 
 static void process_map_line(char *line, int *row, size_t row_idx, size_t cols, t_parse *parse)
 {
-	size_t j = 0;
+	size_t j;
 	char c;
+	size_t	line_len;
 
-	while (j < cols)
+	j = 0;
+	c = 'a';
+	line_len = ft_strlen(line);
+	//printf("line (addr: %p): \"%s\"\n", (void *)line, line);
+//printf("strlen(line) = %zu, expected cols = %zu\n", ft_strlen(line), cols);
+	//if (line == NULL)
+		//return ;
+	while (j < cols && j < line_len)
 	{
 		c = normalize_map_char(line[j]);
-		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		if ((c == 'N' || c == 'S' || c == 'W' || c == 'E'))
 		{
 			handle_player_char(c, j, row_idx, parse);
 			c = '0';
@@ -111,14 +120,14 @@ static void process_map_line(char *line, int *row, size_t row_idx, size_t cols, 
 //	}
 //}
 
-int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
+int	**lst_to_int_map(t_list *lst, t_parse *parse)
 {
 	size_t	cols;
 	size_t	rows;
 	int	**map_tab_array;
 	size_t	i;
 
-	(void)vars;
+	//(void)vars;
 	lst = skip_to_map_lines(lst);
 	rows = ft_lstsize(lst);
 	cols = longest_row(lst);
@@ -130,7 +139,7 @@ int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
 	//needs exit
 
 	i = 0;
-	while (lst)
+	while (lst && is_map_line(lst->content))
 	{
 		process_map_line((char *)lst->content, map_tab_array[i], i, cols, parse);
 		lst = lst->next;

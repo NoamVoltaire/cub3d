@@ -160,49 +160,49 @@
 
 void	init_map(t_map *map, t_parse *parse)
 {
-	int	y;
-	int	x;
-
-	map->grid = malloc(sizeof(int *) * 32);
-	for (y = 0; y < 32; y++)
-		map->grid[y] = malloc(sizeof(int) * 32);
-
-	int map_data[32][32] = {0};
-
-	// Fill the edges with 1s
-	for (y = 0; y < 32; y++)
-	{
-		for (x = 0; x < 32; x++)
-		{
-			if (y == 0 || y == 31 || x == 0 || x == 31)
-				map_data[y][x] = 1;
-		}
-	}
-
-	// Add some extra walls (1s) in the middle for structure
-	map_data[5][5] = 1;
-	map_data[5][6] = 1;
-	map_data[6][6] = 1;
-	map_data[10][10] = 1;
-	map_data[11][10] = 1;
-	map_data[12][10] = 1;
-	map_data[16][16] = 1;
-	map_data[17][16] = 1;
-	map_data[18][16] = 1;
-	map_data[20][20] = 1;
-	map_data[21][21] = 1;
-	map_data[22][22] = 1;
-
-	// Copy to map->grid
-	for (y = 0; y < 32; y++)
-	{
-		for (x = 0; x < 32; x++)
-			map->grid[y][x] = map_data[y][x];
-	}
-	
-	//map->mapx = 32;
-	//map->mapy = 32;
-	//
+//	int	y;
+//	int	x;
+//
+//	map->grid = malloc(sizeof(int *) * 32);
+//	for (y = 0; y < 32; y++)
+//		map->grid[y] = malloc(sizeof(int) * 32);
+//
+//	int map_data[32][32] = {0};
+//
+//	// Fill the edges with 1s
+//	for (y = 0; y < 32; y++)
+//	{
+//		for (x = 0; x < 32; x++)
+//		{
+//			if (y == 0 || y == 31 || x == 0 || x == 31)
+//				map_data[y][x] = 1;
+//		}
+//	}
+//
+//	// Add some extra walls (1s) in the middle for structure
+//	map_data[5][5] = 1;
+//	map_data[5][6] = 1;
+//	map_data[6][6] = 1;
+//	map_data[10][10] = 1;
+//	map_data[11][10] = 1;
+//	map_data[12][10] = 1;
+//	map_data[16][16] = 1;
+//	map_data[17][16] = 1;
+//	map_data[18][16] = 1;
+//	map_data[20][20] = 1;
+//	map_data[21][21] = 1;
+//	map_data[22][22] = 1;
+//
+//	// Copy to map->grid
+//	for (y = 0; y < 32; y++)
+//	{
+//		for (x = 0; x < 32; x++)
+//			map->grid[y][x] = map_data[y][x];
+//	}
+//	
+//	//map->mapx = 32;
+//	//map->mapy = 32;
+//	//
 	map->grid = parse->tab;
 	map->mapx = parse->m_w;
 	map->mapy = parse->m_h;
