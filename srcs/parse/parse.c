@@ -262,6 +262,22 @@ int	check_input_syntax(t_list *input)
 //	//printf(" AYYYYY %d, %d, %d \n ", parse->f_color_input[0],parse->f_color_input[1], parse->f_color_input[2]);  
 //
 //}
+void normalize_tab(int **tab, int width, int height)
+{
+	int y = 0;
+	while (y < height)
+	{
+		int x = 0;
+		while (x < width)
+		{
+			if (tab[y][x] == -1)
+				tab[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+}
+
 int	parse_into_vars(int fd, t_vars *vars)
 {
 	t_list	*lines;
@@ -289,6 +305,7 @@ int	parse_into_vars(int fd, t_vars *vars)
 	if (!flood_fill_map(&parse, parse.p_first_xposm,
 			parse.p_first_yposm))
 		printf("damn the room is not floodtight\n");
+	normalize_tab(parse.tab, parse.m_w , parse.m_h);
 		
 	vars->parse = parse;
 	///

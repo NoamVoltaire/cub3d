@@ -48,7 +48,7 @@ static char normalize_map_char(char c)
 {
 	if (c == '\0')
 		return '1';
-	if (c == ' ')
+	if (c == ' ' )
 		return '0';
 	return c;
 }
