@@ -268,9 +268,9 @@ void	normalize_tab(int **tab, int width, int height)
 	int	x;
 
 	y = 0;
-	x = 0;
 	while (y < height)
 	{
+		x = 0;
 		while (x < width)
 		{
 			if (tab[y][x] == -1)

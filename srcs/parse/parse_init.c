@@ -38,6 +38,7 @@ static int **allocate_map_array(size_t rows, size_t cols)
 	while (i < rows)
 	{
 		map[i] = malloc(sizeof(int) * cols);
+		memset(map[i], 0, sizeof(int) * cols);
 		if (!map[i])
 			return NULL;
 		i++;
