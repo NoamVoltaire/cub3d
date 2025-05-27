@@ -36,7 +36,7 @@ static void	draw_strips(t_vars *vars, t_ray *ray, t_tex *tex, char *dst)
 
 	j = 0;
 	bytes = vars->bits_per_pixel / 8;
-	y = (ray->render.t_y * tex->h * bytes);
+	y = (ray->render.t_y * tex->w * bytes);
 	while (j++ < 10)
 	{
 		color = *(unsigned int *)(tex->addr + y

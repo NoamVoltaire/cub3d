@@ -40,7 +40,7 @@ t_tex	get_tex(t_vars *vars, char *path)
 	tex.w = w;
 	tex.h = h;
 
-	printf("Width: %d, Height: %d, bpp: %d\n", w, h, bpp);
+	//printf("Width: %d, Height: %d, bpp: %d\n", w, h, bpp);
 	if (tex.img == NULL)
 	{
 		printf("Failed to load image\n");

@@ -17,7 +17,7 @@ t_raydraw	init_ray_draw_data(int l_height, t_tex *tex)
 	}
 	d.y_uv = ty_off * d.t_y_step;
 	//this whole ty_off thing is if column larger than HEIGHT , then
-	//truncate and apply y offest on texture
+	//truncate and apply y offest on textu
 	d.t_y = (int)(ty_off * d.t_y_step);
 	d.l_height = l_height;
 	d.y = (HEIGHT / 2) - l_height / 2;
