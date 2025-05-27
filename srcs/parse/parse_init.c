@@ -1,4 +1,5 @@
 #include <cub.h>
+#include <string.h>
 
 size_t	longest_row(t_list *lst)
 {
@@ -17,69 +18,188 @@ size_t	longest_row(t_list *lst)
 }
 
 
-int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
+static t_list *skip_to_map_lines(t_list *lst)
 {
-
-	size_t cols;
-	size_t rows;
-	char	*line;
-	int	**map_tab_array;
-	int	i;
-	size_t	j;
-
-	(void)vars;
-	//		NEED FUNCTION FOR ALLOC
-	i = 0;
-	j = 0;
 	while (lst && !is_map_line(lst->content))
 		lst = lst->next;
+	return lst;
+}
+
+static int **allocate_map_array(size_t rows, size_t cols)
+{
+	int **map;
+	size_t i;
+
+	map = malloc(sizeof(int *) * rows);
+	if (!map)
+		return NULL;
+	i = 0;
+	while (i < rows)
+	{
+		map[i] = malloc(sizeof(int) * cols);
+		if (!map[i])
+			return NULL;
+		i++;
+	}
+	return map;
+}
+
+static char normalize_map_char(char c)
+{
+	if (c == '\0')
+		return '1';
+	if (c == ' ')
+		return '0';
+	return c;
+}
+
+static void handle_player_char(char dir, size_t x, size_t y, t_parse *parse)
+{
+	parse->playerxpos = (x * TILE_SIZE) + (TILE_SIZE / 2);
+	parse->playerypos = (y * TILE_SIZE) + (TILE_SIZE / 2);
+	if (dir == 'N')
+		parse->p_angle = tPI / 2;
+	else if (dir == 'S')
+		parse->p_angle = 3 * tPI / 2;
+	else if (dir == 'E')
+		parse->p_angle = 0;
+	else if (dir == 'W')
+		parse->p_angle = tPI;
+}
+
+
+static void process_map_line(char *line, int *row, size_t row_idx, size_t cols, t_parse *parse)
+{
+	size_t j = 0;
+	char c;
+
+	while (j < cols)
+	{
+		c = normalize_map_char(line[j]);
+		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		{
+			handle_player_char(c, j, row_idx, parse);
+			c = '0';
+		}
+		row[j] = c - '0';
+		j++;
+	}
+}
+
+//static void process_map_line(char *line, int *row, size_t row_idx, size_t cols, t_parse *parse)
+//{
+//	size_t j = 0;
+//
+//	while (j < cols)
+//	{
+//		if (line[j] == '\0')
+//			line[j] = '1';
+//		if (line[j] == ' ')
+//			line[j] = '0';
+//		if (line[j] == 'N' || line[j] == 'S' || line[j] == 'W' || line[j] == 'E')
+//		{
+//			parse->playerxpos = (j * TILE_SIZE) + (TILE_SIZE / 2);
+//			parse->playerypos = (row_idx * TILE_SIZE) + (TILE_SIZE / 2);
+//			//printf("Player found at map[%zu][%zu], setting position to %f, %f\n",
+//				j, row_idx, parse->playerxpos, parse->playerypos);
+//			line[j] = '0';
+//		}
+//		row[j] = line[j] - '0';
+//		j++;
+//	}
+//}
+
+int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
+{
+	size_t	cols;
+	size_t	rows;
+	int	**map_tab_array;
+	size_t	i;
+
+	(void)vars;
+	lst = skip_to_map_lines(lst);
 	rows = ft_lstsize(lst);
 	cols = longest_row(lst);
 	parse->m_w = cols;
 	parse->m_h = rows;
-	map_tab_array = malloc(sizeof(int *) * rows);
+	map_tab_array = allocate_map_array(rows, cols);
 	if (!map_tab_array)
-		return (NULL);
+		return NULL;
+	//needs exit
+
+	i = 0;
 	while (lst)
 	{
-		j = 0;
-		map_tab_array[i] = malloc(sizeof(int) * cols);
-		if (!map_tab_array[i])
-			return NULL;
-		line = (char *)lst->content;
-		while (j < cols)
-		{
-			if (line[j] == '\0')
-				line [j] = '1';
-			//	NEED FUNCTION FOR SETTING PLAYER
-			if (line[j] == 'N' || line[j] == 'S' || line[j] == 'W' || line[j] == 'E')
-			{
-				parse->playerxpos = (j * TILE_SIZE) + (TILE_SIZE / 2);
-				parse->playerypos = (i * TILE_SIZE) + (TILE_SIZE / 2);
-				//parse->playerxpos = (j * parse->m_w) + (parse->m_w / 2);
-				//parse->playerypos = (i * parse->m_w) + (parse->m_w / 2);
-				printf("Player found at map[%zu][%d], setting position to %f, %f\n",
-	j, i,
-	parse->playerxpos,
-	parse->playerypos);line[j] = '0';
-			}
-			else if (line[j] == ' ')
-				line[j] = '1';
-			//	THIS IS A QUICKFIX BUT NEEDS FLOOD FILL BEFORE
-
-			map_tab_array[i][j] = line[j] - '0';
-
-			j++;
-		}
-		lst = lst->next; 
+		process_map_line((char *)lst->content, map_tab_array[i], i, cols, parse);
+		lst = lst->next;
 		i++;
-		line = NULL;
 	}
-		
-
-	return  (map_tab_array);
-
+	return map_tab_array;
 }
+
+//int **lst_to_int_map(t_list *lst, t_vars *vars, t_parse *parse)
+//{
+//
+//	size_t cols;
+//	size_t rows;
+//	char	*line;
+//	int	**map_tab_array;
+//	int	i;
+//	size_t	j;
+//
+//	(void)vars;
+//	//		NEED FUNCTION FOR ALLOC
+//	i = 0;
+//	j = 0;
+//	while (lst && !is_map_line(lst->content))
+//		lst = lst->next;
+//	rows = ft_lstsize(lst);
+//	cols = longest_row(lst);
+//	parse->m_w = cols;
+//	parse->m_h = rows;
+//	map_tab_array = malloc(sizeof(int *) * rows);
+//	if (!map_tab_array)
+//		return (NULL);
+//	while (lst)
+//	{
+//		j = 0;
+//		map_tab_array[i] = malloc(sizeof(int) * cols);
+//		if (!map_tab_array[i])
+//			return NULL;
+//		line = (char *)lst->content;
+//		while (j < cols)
+//		{
+//			if (line[j] == '\0')
+//				line [j] = '1';
+//			//	NEED FUNCTION FOR SETTING PLAYER
+//			if (line[j] == 'N' || line[j] == 'S' || line[j] == 'W' || line[j] == 'E')
+//			{
+//				parse->playerxpos = (j * TILE_SIZE) + (TILE_SIZE / 2);
+//				parse->playerypos = (i * TILE_SIZE) + (TILE_SIZE / 2);
+//				//parse->playerxpos = (j * parse->m_w) + (parse->m_w / 2);
+//				//parse->playerypos = (i * parse->m_w) + (parse->m_w / 2);
+//				printf("Player found at map[%zu][%d], setting position to %f, %f\n",
+//	j, i,
+//	parse->playerxpos,
+//	parse->playerypos);line[j] = '0';
+//			}
+//			else if (line[j] == ' ')
+//				line[j] = '1';
+//			//	THIS IS A QUICKFIX BUT NEEDS FLOOD FILL BEFORE
+//
+//			map_tab_array[i][j] = line[j] - '0';
+//
+//			j++;
+//		}
+//		lst = lst->next; 
+//		i++;
+//		line = NULL;
+//	}
+//		
+//
+//	return  (map_tab_array);
+//
+//}
 
 int	check_args_before_map(t_list *lines)
 {
@@ -126,17 +246,24 @@ static void	set_rgb_colors(char *line, int color_arr[4])
 	char	**rgb_to_convert;
 	int		count;
 	int		j;
+	int		is_in_range;
 
 	//printf("line = = = %s\n", line);
 	j = 0;
 	rgb_to_convert = ft_split(line, ',');
 	count = 0;
+	is_in_range = 1;
 	while (rgb_to_convert[count])
+	{
+		if (count <= 3 && !(ft_atoi(rgb_to_convert[count]) < 255
+			&& ft_atoi(rgb_to_convert[count]) > 0))
+			is_in_range = 0;
 		count++;
-	    //for (j = 0; j < count; j++)
+	}
+	   //for (j = 0; j < count; j++)
         //printf("Token %d: '%s'\n", j, rgb_to_convert[j]);
 	//j = 0;
-	if (count != 3)
+	if (count != 3 || is_in_range)
 	{
 		free_tab(rgb_to_convert);
 		//return (0);
@@ -145,6 +272,7 @@ static void	set_rgb_colors(char *line, int color_arr[4])
 	}
 	while (j < 3)
 	{
+
 		color_arr[j] = ft_atoi(rgb_to_convert[j]);
 		j++;
 		//color_arr[j] = ft_atoi(line);
@@ -172,7 +300,10 @@ int	line_into_color_textures(t_parse *parse, char *line, int j)
 			set_rgb_colors(line + j + 1, parse->c_color_input);
 			//parse->c_color_input = set_rgb_colors(line + j + 1, parse->c_color_input);
 			if (parse->c_color_input[3] == 0)
+			{
 					printf ("not valid color\n");
+			exit(1);
+			}
 				//return (err_msg(data->mapinfo.path, ERR_COLOR_CEILING, ERR));
 		}
 		else if (parse->f_color_input[3] == 0 && line[j] == 'F')
@@ -181,7 +312,10 @@ int	line_into_color_textures(t_parse *parse, char *line, int j)
 			set_rgb_colors(line + j + 1, parse->f_color_input);
 			//parse->f_color_input = set_rgb_colors(line + j + 1, parse->f_color_input);
 			if (parse->f_color_input[3]== 0)
+			{
 					printf ("not valid color\n");
+			exit(1);
+			}
 				//return (err_msg(data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
 		}
 	}
@@ -255,12 +389,17 @@ int	ignore_space_get_info(char *line, t_parse *parse)
 		if (line[j + 1] && (line[j] == 'C' || line[j] == 'F' ))
 		{
 			if (line_into_color_textures(parse, line, j))
-				printf ("we didn't put an error for colors failing \n");
+			{
+				//printf ("we didn't put an error for colors failing \n");
+				ft_putstr_fd("we didn't put an error for colors failing \n", 2);
+			}
+
 		}
 		else if (line[j + 1] && ft_isprint(line[j + 1]) && !ft_isdigit(line[j+1])) 
 		{
 			if (line_into_texture_path(line, parse, j))
 			{
+				ft_putstr_fd("we didn't put an error for colors failing \n", 2);
 				printf ("we didn't put an error for texturepath failing \n");
 				printf ("line is %s\n", (line +j));
 			}
@@ -273,8 +412,8 @@ int	ignore_space_get_info(char *line, t_parse *parse)
 
 void	initialize_vars(t_list *lst, t_parse *parse)
 {
-	parse->c_color_input[3] = 0;
-	parse->f_color_input[3] = 0;
+	//parse->c_color_input[3] = 0;
+	//parse->f_color_input[3] = 0;
 	parse->t_paths[0] = NULL;
 	parse->t_paths[1] = NULL;
 	parse->t_paths[2] = NULL;

@@ -12,7 +12,7 @@ INIT = init_vars init_player init_map init_mlx_window init_texture init_ray_draw
 HOOKS =  the_hooks handle_keys_state escape
 ENGINE = draw_map draw_cube_player every_frame update_pos floor_ceiling update_pos_rot
 RAYCASTING = raycasting casting r_hit_wall r_offset_calc draw_graphics
-UTILS = my_mlx_pixel_put line_drawing get_time pixel_display_utils
+UTILS = my_mlx_pixel_put line_drawing get_time pixel_display_utils flood_fill_map
 PARSE = parse next_gnl parse_init
 
 SRCS = $(addsuffix .c, $(INIT))\

@@ -53,11 +53,7 @@ void	calc_offset_up_down(t_ray *ray, t_map *map, t_player *player, double ra)
 
 void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 {
-	double	dof;
-
-	(void)dof;
 	ray->ra = ra;
-	dof = 0;
 	ray->hit_dir = 0;
 	if (fabs(ra) < 0.0001 || fabs(PI - ra) < 0.0001)
 	{
@@ -66,7 +62,6 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 		ray->ry = player->ypos;
 		ray->xo = player->xpos;
 		ray->yo = player->ypos;
-		dof = map->mapx;
 	}
 	else
 		calc_offset_up_down(ray, map, player, ra);
@@ -98,24 +93,20 @@ double	nTan;
 void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra)
 {
 
-	double	dof;
 	//double	nTan; 
 
-	(void)dof;
 
-	dof = 0;
 	ray->ra = ra;
 	ray->hit_dir = 0;
-	if (ra == 0.0 || fabs(PI - ra) < 0.0001)
-	{
-		printf("WEGETTHERE*****\n");
-		ray->rx = player->xpos;
-		ray->ry = player->ypos;
-		ray->xo = player->xpos;
-		ray->yo = player->ypos;
-		dof = 0;
-	}
-	else
+//	if (ra == 0.0 || fabs(PI - ra) < 0.0001)
+//	{
+//		printf("WEGETTHERE*****\n");
+//		ray->rx = player->xpos;
+//		ray->ry = player->ypos;
+//		ray->xo = player->xpos;
+//		ray->yo = player->ypos;
+//	}
+	//else
 		calc_offset_right_left(ray, map, player, ra);
 }
 

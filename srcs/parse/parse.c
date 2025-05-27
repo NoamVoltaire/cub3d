@@ -286,6 +286,10 @@ int	parse_into_vars(int fd, t_vars *vars)
 	//init_f_c_parse(lines, &parse);
 	initialize_vars(lines, &parse);
 	parse.tab = lst_to_int_map(lines, vars ,&parse);
+	if (!flood_fill_map(&parse, parse.p_first_xposm,
+			parse.p_first_yposm))
+		printf("damn the room is not floodtight\n");
+		
 	vars->parse = parse;
 	///
 	////

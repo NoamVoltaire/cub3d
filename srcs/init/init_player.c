@@ -28,7 +28,7 @@ void	init_player(t_player *player, t_parse *parse)
 	//player->ypos = HEIGHT / 2;
 	player->xpos = parse->playerxpos;
 	player->ypos = parse->playerypos;
-	player->angle = 0 ;
+	player->angle = parse->p_angle;
 	player->xdelt = cos(player->angle) * 5;
 	player->ydelt = sin(player->angle) * 5;
 	player->move_spd = 15;

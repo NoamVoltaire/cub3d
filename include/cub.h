@@ -57,6 +57,8 @@ typedef struct s_parse
 	int	**tab;
 	int	m_w;
 	int	m_h;
+	int	p_first_xposm;
+	int	p_first_yposm;
 	double	playerxpos;
 	double	playerypos;
 	double	p_angle;
@@ -216,6 +218,7 @@ int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
 double	get_time(void);
+int	flood_fill_map(t_parse *parse,int x, int y);
 
 void	update_pos(t_player *player, t_map *map);
 void	handle_rotation(t_player *player);
