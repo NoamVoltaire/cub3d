@@ -275,12 +275,12 @@ int	parse_into_vars(int fd, t_vars *vars)
 	}
 	//check_args_before_map(lines);//
 	//(void)vars;
-	t_list *ptr = lines;
-	while (ptr)
-	{
-		printf("%s", (char *)ptr->content);
-		ptr = ptr->next;
-	}
+	//t_list *ptr = lines;
+	//while (ptr)
+	//{
+	//	printf("%s", (char *)ptr->content);
+	//	ptr = ptr->next;
+	//}
 	//ROUGH IDEA
 	//init_t_parse(lines, &parse);
 	//init_f_c_parse(lines, &parse);

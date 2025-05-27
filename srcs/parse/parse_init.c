@@ -57,6 +57,8 @@ static void handle_player_char(char dir, size_t x, size_t y, t_parse *parse)
 {
 	parse->playerxpos = (x * TILE_SIZE) + (TILE_SIZE / 2);
 	parse->playerypos = (y * TILE_SIZE) + (TILE_SIZE / 2);
+	parse->p_first_xposm = x;
+	parse->p_first_yposm = y;
 	if (dir == 'N')
 		parse->p_angle = tPI / 2;
 	else if (dir == 'S')
