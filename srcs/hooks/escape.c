@@ -48,6 +48,7 @@ void	quit_everything(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->window);
 	mlx_destroy_display(vars->mlx);
 	delete_map(&vars->map);
+	ft_lstclear(&(vars->lst), &free);
 	free(vars);
 	exit(0);
 }

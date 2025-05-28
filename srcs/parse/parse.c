@@ -107,6 +107,7 @@ int	parse_into_vars(int fd, t_vars *vars)
 		perror("close");
 		return (1);
 	}
+	vars->lst = lines;
 	initialize_vars(lines, &parse);
 	parse.tab = lst_to_int_map(lines, &parse);
 	if (!flood_fill_map(&parse, parse.p_first_xposm,

@@ -67,12 +67,6 @@ typedef struct s_parse
 	int f_color_input[4];
 	int c_color_input[4];
 	int	m_has_player;
-	//char	*
-	
-	//char	*no_path;
-	//char	*so_path;
-	//char	*we_path;
-	//char	*ea_path;
 }	t_parse;
 
 typedef	struct s_tex
@@ -185,6 +179,7 @@ typedef struct s_vars
 	t_player	player;
 	t_texture	textures;
 	t_parse		parse;
+	t_list	*lst;
 
 }		t_vars;
 

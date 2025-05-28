@@ -30,12 +30,14 @@ int	process_map_line(char *line, int *row, int row_idx, t_parse *parse)
 	char	c;
 	int		j;
 	int		line_has_player;
+	int		line_len;
 
 	j = 0;
 	line_has_player = 0;
+	line_len = ft_strlen(line);
 	if (line == NULL)
 		return (0);
-	while (j < parse->m_w)
+	while (j < parse->m_w && j < line_len)
 	{
 		c = normalize_map_char(line[j]);
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')

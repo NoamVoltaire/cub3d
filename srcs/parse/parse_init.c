@@ -37,7 +37,7 @@ int	ignore_space_get_info(char *line, t_parse *parse)
 				handle_parse_error(parse, ERR_COLOR_FORMAT);
 		}
 		else if (line[j + 1] && ft_isprint(line[j + 1])
-			&& !ft_isdigit(line[j + 1])) 
+			&& !ft_isdigit(line[j + 1]))
 		{
 			if (line_into_texture_path(line, parse, j))
 				handle_parse_error(parse, ERR_COLOR_FORMAT);

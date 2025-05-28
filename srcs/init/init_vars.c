@@ -24,4 +24,5 @@ void	init_vars(t_vars *vars)
 	init_window(vars);
 	init_textures(vars, rgb_to_hex(vars->parse.f_color_input),
 		rgb_to_hex(vars->parse.c_color_input));
+	//free_tab(vars->parse.t_paths);
 }
