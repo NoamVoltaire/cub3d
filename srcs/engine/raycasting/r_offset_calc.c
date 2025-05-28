@@ -26,27 +26,25 @@ double	safe_tan(double angle)
 
 void	calc_offset_up_down(t_ray *ray, t_map *map, t_player *player, double ra)
 {
-	double	aTan; 
+	double	_atan; 
 
-	//ray->ra = ra;
-	aTan = -1 / safe_tan(ra);
+	_atan = -1 / tan(ra);
 	if (ra > PI)
 	{
 		ray->ry = (((int)player->ypos / map->tilesize)
 				* map->tilesize) - 0.0001;
-		ray->rx = (player->ypos - ray->ry) * aTan + player->xpos;
+		ray->rx = (player->ypos - ray->ry) * _atan + player->xpos;
 		ray->yo = -map->tilesize;
-		ray->xo = -ray->yo * aTan;
+		ray->xo = -ray->yo * _atan;
 		ray->hit_dir = 0;
 	}
 	else if (ra < PI)
 	{
-	//printf("INFF == \n");
 		ray->ry = (((int)player->ypos / map->tilesize)
 				* map->tilesize) + map->tilesize;
-		ray->rx = (player->ypos - ray->ry) * aTan + player->xpos;
+		ray->rx = (player->ypos - ray->ry) * _atan + player->xpos;
 		ray->yo = map->tilesize;
-		ray->xo = -ray->yo * aTan;
+		ray->xo = -ray->yo * _atan;
 		ray->hit_dir = 2;
 	}
 }
@@ -57,7 +55,6 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 	ray->hit_dir = 0;
 	if (fabs(ra) < 0.0001 || fabs(PI - ra) < 0.0001)
 	{
-		////printf("WEGETTHERE*****\n");
 		ray->rx = player->xpos;
 		ray->ry = player->ypos;
 		ray->xo = player->xpos;
@@ -66,36 +63,34 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 	else
 		calc_offset_up_down(ray, map, player, ra);
 }
-void	calc_offset_right_left(t_ray *ray, t_map *map, t_player *player, double ra)
+void	calc_offset_right_left(t_ray *ray, t_map *map,
+				t_player *player, double ra)
 {
-double	nTan; 
-		nTan = -tan(ra);
+	double	_ntan; 
+
+	_ntan = -tan(ra);
 	if (ra > PII && ra < PIII)
 	{
-	//printf("LEFT== \n");
-		ray->rx = (((int)player->xpos / map->tilesize) * map->tilesize) - 0.0001;
-		ray->ry = (player->xpos - ray->rx) * nTan + player->ypos;
+		ray->rx = (((int)player->xpos / map->tilesize)
+				* map->tilesize) - 0.0001;
+		ray->ry = (player->xpos - ray->rx) * _ntan + player->ypos;
 		ray->xo = -map->tilesize;
-		ray->yo = -ray->xo * nTan;
+		ray->yo = -ray->xo * _ntan;
 		ray->hit_dir = 3;
 	}
 	else if (ra < PII || ra > PIII)
 	{
-	//printf("RIGHT == \n");
-		ray->rx = (((int)player->xpos / map->tilesize) * map->tilesize) + map->tilesize;
-		ray->ry = (player->xpos - ray->rx) * nTan + player->ypos;
+		ray->rx = (((int)player->xpos / map->tilesize)
+				* map->tilesize) + map->tilesize;
+		ray->ry = (player->xpos - ray->rx) * _ntan + player->ypos;
 		ray->xo = map->tilesize;
-		ray->yo = -ray->xo * nTan;
+		ray->yo = -ray->xo * _ntan;
 		ray->hit_dir = 1;
 	}
 }
 
 void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra)
 {
-
-	//double	nTan; 
-
-
 	ray->ra = ra;
 	ray->hit_dir = 0;
 //	if (ra == 0.0 || fabs(PI - ra) < 0.0001)

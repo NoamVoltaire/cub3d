@@ -63,13 +63,13 @@ static void handle_player_char(char dir, size_t x, size_t y, t_parse *parse)
 	parse->p_first_xposm = x;
 	parse->p_first_yposm = y;
 	if (dir == 'N')
-		parse->p_angle = tPI / 2;
+		parse->p_angle = PIII;
 	else if (dir == 'S')
-		parse->p_angle = 3 * tPI / 2;
+		parse->p_angle = PII;
 	else if (dir == 'E')
 		parse->p_angle = 0;
 	else if (dir == 'W')
-		parse->p_angle = tPI;
+		parse->p_angle = PI;
 }
 
 
@@ -159,6 +159,7 @@ int	**lst_to_int_map(t_list *lst, t_parse *parse)
 		parse->tab = map_tab_array;
 		handle_parse_error(parse, ERR_MISSING_PLAYER);
 	}
+	printf("ok %f\n", parse->p_angle);
 	return map_tab_array;
 }
 

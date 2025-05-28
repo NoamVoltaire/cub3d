@@ -41,4 +41,3 @@ void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 // there should be th loop to shoot multiple ray, and to in the same loop
 		// have it draw garphics
 	//do a function that now put pixel on tha screen for each rays
-

@@ -24,8 +24,6 @@ void	set_keyb(t_keyb *keybind)
 
 void	init_player(t_player *player, t_parse *parse)
 {
-	//player->xpos = WIDTH / 2;
-	//player->ypos = HEIGHT / 2;
 	player->xpos = parse->playerxpos;
 	player->ypos = parse->playerypos;
 	player->angle = parse->p_angle;

@@ -39,10 +39,10 @@ t_tex	get_tex(t_vars *vars, char *path)
 	tex.img = mlx_xpm_file_to_image(vars->mlx, path, &w, &h);
 	tex.w = w;
 	tex.h = h;
-
-	//printf("Width: %d, Height: %d, bpp: %d\n", w, h, bpp);
 	if (tex.img == NULL)
 	{
+		//
+		//
 		printf("Failed to load image\n");
 		exit(1);										//TODO
 		//return (NULL);
@@ -61,11 +61,8 @@ void	init_textures(t_vars *vars, int floor_col, int ceiling_col)
 	texture.so = get_tex(vars, vars->parse.t_paths[1]);
 	texture.we = get_tex(vars, vars->parse.t_paths[2]);
 	texture.ea = get_tex(vars, vars->parse.t_paths[3]);
-	//also needs a function to free those images
 	floor_ = fill_floor_ceiling_array(vars, floor_col);
 	ceiling_ = fill_floor_ceiling_array(vars, ceiling_col);
-
-
 	vars->textures = texture;
 	vars->textures.floor = floor_;
 	vars->textures.ceiling = ceiling_;

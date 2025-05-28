@@ -35,7 +35,7 @@ float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars)
 			dof++;
 		}
 	}
-		return (sqrt(((ray->rx - vars->player.xpos)
+	return (sqrt(((ray->rx - vars->player.xpos)
 				* (ray->rx - vars->player.xpos))
 			+ ((ray->ry - vars->player.ypos)
 				*(ray->ry - vars->player.ypos))));
