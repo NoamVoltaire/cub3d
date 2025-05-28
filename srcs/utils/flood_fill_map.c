@@ -1,16 +1,30 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   flood_fill_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:52:08 by nvoltair          #+#    #+#             */
-/*   Updated: 2025/05/28 10:52:10 by nvoltair         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:20:01 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub.h>
+
+void print_2d_array(int **array, int rows, int cols)
+{
+	int i;
+	int j;
+
+	for (i = 0; i < rows; i++)
+	{
+		for (j = 0; j < cols; j++)
+		{
+			printf("%d ", array[i][j]);
+		}
+		printf("\n");
+	}
+}
 
 int	flood_cell(t_parse *parse, int x, int y)
 {
@@ -21,7 +35,7 @@ int	flood_cell(t_parse *parse, int x, int y)
 
 	if (x < 0 || y < 0 || x >= parse->m_w || y >= parse->m_h)
 		return (0);
-	if (parse->tab[x][y] == ' ')
+	if (parse->tab[y][x] == ' ')
 		return (0);
 	if (parse->tab[y][x] != '0')
 		return (1);
@@ -61,7 +75,7 @@ int	flood_fill_map(t_parse *parse)
 {
 	int	x;
 	int	y;
-
+	print_2d_array(parse->tab, parse->m_h, parse->m_w);
 	while (find_first_zero(parse, &x, &y))
 	{
 		if (!flood_cell(parse, x, y))

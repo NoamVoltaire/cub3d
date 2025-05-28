@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/28 10:00:01 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:36:51 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ int		every_frame(void *param);
 void	draw_map(t_map map, t_vars *vars);
 double	get_time(void);
 int	flood_fill_map(t_parse *parse);
+void	replace_newlines(t_list *lst);
 
 void	update_pos(t_player *player, t_map *map);
 void	handle_rotation(t_player *player);

@@ -14,7 +14,7 @@ INIT = init_vars init_player init_map init_mlx_window init_texture init_ray_draw
 HOOKS =  the_hooks handle_keys_state escape
 ENGINE = every_frame update_pos floor_ceiling update_pos_rot 
 RAYCASTING = raycasting casting r_hit_wall r_offset_calc draw_graphics
-UTILS = get_time pixel_display_utils flood_fill_map lst_to_int_map lst_utils errors free
+UTILS = get_time pixel_display_utils flood_fill_map lst_to_int_map lst_utils errors free replace_newline
 PARSE = parse next_gnl_utils next_gnl print_error_msg parse_init line_into_texture_pth line_into_colors
 
 SRCS = $(addsuffix .c, $(INIT))\
