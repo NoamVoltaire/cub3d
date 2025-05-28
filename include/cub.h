@@ -184,7 +184,6 @@ typedef struct s_vars
 	t_player	player;
 	t_texture	textures;
 	t_parse		parse;
-	t_list	*lst;
 
 }		t_vars;
 
@@ -223,7 +222,8 @@ void	init_player(t_player *player, t_parse *parse);
 void	init_window(t_vars *vars);
 void	init_textures(t_vars *vars, int floor_col, int ceiling_col);
 void	the_hooks(t_vars *vars);
-int close_window(t_vars *vars);
+//int close_window(t_vars *vars);
+int	quit_everything(void *data);
 int		handle_key_press(int keycode, t_vars *vars);
 int		handle_key_release(int keycode, t_vars *vars);
 int	escape(int keycode,t_vars *vars);
@@ -231,7 +231,7 @@ int		every_frame(void *param);
 
 void	draw_map(t_map map, t_vars *vars);
 double	get_time(void);
-int	flood_fill_map(t_parse *parse,int x, int y);
+int	flood_fill_map(t_parse *parse);
 
 void	update_pos(t_player *player, t_map *map);
 void	handle_rotation(t_player *player);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 10:51:48 by nvoltair          #+#    #+#             */
+/*   Updated: 2025/05/28 10:51:51 by nvoltair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub.h>
 
 size_t	longest_row(t_list *lst)
@@ -35,9 +47,9 @@ int	**allocate_map_array(size_t rows, size_t cols)
 	while (i < rows)
 	{
 		map[i] = malloc(sizeof(int) * cols);
-		memset(map[i], 0, sizeof(int) * cols);
 		if (!map[i])
 			return (NULL);
+		ft_memset(map[i], 0, sizeof(int) * cols);
 		i++;
 	}
 	return (map);

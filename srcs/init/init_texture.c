@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:31:56 by noam              #+#    #+#             */
-/*   Updated: 2025/05/25 14:36:41 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 10:45:54 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	init_textures(t_vars *vars, int floor_col, int ceiling_col)
 	t_texture	texture;
 	char		*floor_;
 	char		*ceiling_;
-
+	
+	ft_bzero(&texture, sizeof(t_texture));
 	texture.no = get_tex(vars, vars->parse.t_paths[0]);
 	texture.so = get_tex(vars, vars->parse.t_paths[1]);
 	texture.we = get_tex(vars, vars->parse.t_paths[2]);

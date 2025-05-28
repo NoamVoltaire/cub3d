@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_offset_calc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 14:33:39 by noam              #+#    #+#             */
-/*   Updated: 2025/05/26 17:47:00 noam              ###   ########.fr	      */
+/*   Created: 2025/05/28 10:49:33 by nvoltair          #+#    #+#             */
+/*   Updated: 2025/05/28 10:49:36 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	safe_tan(double angle)
 
 void	calc_offset_up_down(t_ray *ray, t_map *map, t_player *player, double ra)
 {
-	double	_atan; 
+	double	_atan;
 
 	_atan = -1 / tan(ra);
 	if (ra > PI)
@@ -67,7 +67,7 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 void	calc_offset_right_left(t_ray *ray, t_map *map,
 				t_player *player, double ra)
 {
-	double	_ntan; 
+	double	_ntan;
 
 	_ntan = -tan(ra);
 	if (ra > PII && ra < PIII)

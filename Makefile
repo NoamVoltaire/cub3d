@@ -1,9 +1,8 @@
 
 NAME = cub3D
 CC = cc
-FLAGS = -Wall -Wextra -Werror
 VPATH = srcs/ srcs/init/ srcs/hooks/ srcs/engine/ srcs/utils srcs/engine/raycasting srcs/parse
-FLAGS = -Wall -Wextra -Werror -Iinclude -Iminilibx-linux -Ilibft
+FLAGS = -Wall -Wextra -Werror -Iinclude -Iminilibx-linux -Ilibft -g3
 LFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm -Llibft -lft
 LIBFT = libft/libft.a
 LIBFT_DIR = libft/

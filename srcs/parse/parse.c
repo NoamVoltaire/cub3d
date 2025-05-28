@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:41:07 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/28 10:42:57 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:02:16 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	parse_into_vars(int fd, t_vars *vars)
 		perror("close");
 		return (1);
 	}
-	vars->lst = parse.lines;
 	initialize_vars(parse.lines, &parse);
 	parse.tab = lst_to_int_map(parse.lines, &parse);
 	if (!flood_fill_map(&parse, parse.p_first_xposm,

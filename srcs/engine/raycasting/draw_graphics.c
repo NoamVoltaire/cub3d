@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_graphics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:33:25 by noam              #+#    #+#             */
-/*   Updated: 2025/05/25 14:33:28 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 10:44:43 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	draw_column_pixels(t_vars *vars, t_ray *ray, t_tex *tex, int ray_nb)
 	x_u = calculate_x_uv(ray, vars, tex);
 	while (i < ray->render.l_height)
 	{
-		ray->render.x_uv = x_u; 
+		ray->render.x_uv = x_u;
 		draw_strips(vars, ray, tex, dst);
 		dst += vars->line_length;
 		i++;
