@@ -41,11 +41,7 @@ t_tex	get_tex(t_vars *vars, char *path)
 	tex.h = h;
 	if (tex.img == NULL)
 	{
-		//
-		//
-		printf("Failed to load image\n");
-		exit(1);										//TODO
-		//return (NULL);
+		handle_parse_error(&vars->parse, ERR_TEXTURE_PATH);
 	}
 	tex.addr = mlx_get_data_addr(tex.img, &bpp, &w, &h);
 	return (tex);
@@ -56,7 +52,7 @@ void	init_textures(t_vars *vars, int floor_col, int ceiling_col)
 	t_texture	texture;
 	char		*floor_;
 	char		*ceiling_;
-	
+
 	ft_bzero(&texture, sizeof(t_texture));
 	texture.no = get_tex(vars, vars->parse.t_paths[0]);
 	texture.so = get_tex(vars, vars->parse.t_paths[1]);

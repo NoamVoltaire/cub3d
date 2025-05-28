@@ -33,18 +33,15 @@
 # include <fcntl.h>
 # include <math.h>
 # include <fcntl.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include "error.h"
+# include <stdio.h>
+# include <sys/time.h>
+# include "error.h"
 # include "libft.h"
 
-//# define HEIGHT 1880
 # define HEIGHT 940
-//# define WIDTH 2540
 # define WIDTH 1280
 # define TILE_SIZE 64  
-# define PI 3.141592653589793//23846
-# define tPI 6.28318530718
+# define PI 3.141592653589793
 # define PII 1.57079632679
 # define PIII 4.71238898038
 # define DR 0.0174533
@@ -59,22 +56,22 @@ typedef struct s_gnl
 
 typedef struct s_parse
 {
-	int	**tab;
-	int	m_w;
-	int	m_h;
-	int	p_first_xposm;
-	int	p_first_yposm;
+	int		**tab;
+	int		m_w;
+	int		m_h;
+	int		p_first_xposm;
+	int		p_first_yposm;
 	double	playerxpos;
 	double	playerypos;
 	double	p_angle;
 	char	*t_paths[4];
-	int f_color_input[4];
-	int c_color_input[4];
-	int	m_has_player;
+	int		f_color_input[4];
+	int		c_color_input[4];
+	int		m_has_player;
 	t_list	*lines;
 }	t_parse;
 
-typedef	struct s_tex
+typedef struct s_tex
 {
 	void	*img;
 	char	*addr;
@@ -83,7 +80,7 @@ typedef	struct s_tex
 
 }	t_tex;
 
-typedef	struct s_textures
+typedef struct s_textures
 {
 	t_tex	no;
 	t_tex	so;
@@ -161,7 +158,6 @@ typedef struct s_moveprobe
 	int		pos_yo;
 }	t_moveprobe;
 
-
 typedef struct s_vars
 {
 	void		*mlx;
@@ -178,74 +174,69 @@ typedef struct s_vars
 
 }		t_vars;
 
-
 //PARSING
-int		print_error_msg(char *msg);
-int		parse_into_vars(int fd, t_vars *vars);
-int		initialize_gnl_data(t_gnl *data, char *save, char **line, int fd);
-int		get_save(t_gnl *data);
-int		get_line(t_gnl *data);
-int		next_gnl(char **line, int fd);
-bool	is_map_line(char *line);
-void	init_f_c_parse(t_list *lines, t_parse *parse);
-void	init_t_parse(t_list *lines, t_parse *parse);
-void	initialize_vars(t_list *lst, t_parse *parse);
-int		**lst_to_int_map(t_list *lst, t_parse *parse);
-size_t	longest_row(t_list *lst);
-t_list	*skip_to_map_lines(t_list *lst);
-int		**allocate_map_array(size_t rows, size_t cols);
-//int	process_map_line(char *line, int *row, int row_idx, t_parse *parse);
-//int	check_args_before_map(t_list *lines);
-int		line_into_texture_path(char *line, t_parse *parse, int j);
-int		line_into_color_textures(t_parse *parse, char *line, int j);
+int				print_error_msg(char *msg);
+int				parse_into_vars(int fd, t_vars *vars);
+int				initialize_gnl_data(t_gnl *data, char *save,
+					char **line, int fd);
+int				get_save(t_gnl *data);
+int				get_line(t_gnl *data);
+int				next_gnl(char **line, int fd);
+bool			is_map_line(char *line);
+void			init_f_c_parse(t_list *lines, t_parse *parse);
+void			init_t_parse(t_list *lines, t_parse *parse);
+void			initialize_vars(t_list *lst, t_parse *parse);
+int				**lst_to_int_map(t_list *lst, t_parse *parse);
+size_t			longest_row(t_list *lst);
+t_list			*skip_to_map_lines(t_list *lst);
+int				**allocate_map_array(size_t rows, size_t cols);
+//		int	process_map_line(char *line, int *row, int row_idx, t_parse *parse);
+//		int	check_args_before_map(t_list *lines);
+int				line_into_texture_path(char *line, t_parse *parse, int j);
+int				line_into_color_textures(t_parse *parse, char *line, int j);
 
-void	init_vars(t_vars *vars);
-void	init_map(t_map *map, t_parse *parse);
-void	init_player(t_player *player, t_parse *parse);
-void	init_window(t_vars *vars);
-void	init_textures(t_vars *vars, int floor_col, int ceiling_col);
-void	the_hooks(t_vars *vars);
-//int close_window(t_vars *vars);
-int	quit_everything(void *data);
-int		handle_key_press(int keycode, t_vars *vars);
-int		handle_key_release(int keycode, t_vars *vars);
-int	escape(int keycode,t_vars *vars);
-int		every_frame(void *param);
+void			init_vars(t_vars *vars);
+void			init_map(t_map *map, t_parse *parse);
+void			init_player(t_player *player, t_parse *parse);
+void			init_window(t_vars *vars);
+void			init_textures(t_vars *vars, int floor_col, int ceiling_col);
+void			the_hooks(t_vars *vars);
+//		int close_window(t_vars *vars);
+int				quit_everything(void *data);
+int				handle_key_press(int keycode, t_vars *vars);
+int				handle_key_release(int keycode, t_vars *vars);
+int				escape(int keycode, t_vars *vars);
+int				every_frame(void *param);
 
-void	draw_map(t_map map, t_vars *vars);
-double	get_time(void);
-int	flood_fill_map(t_parse *parse);
-void	replace_newlines(t_list *lst);
+void			draw_map(t_map map, t_vars *vars);
+double			get_time(void);
+int				flood_fill_map(t_parse *parse);
+void			replace_newlines(t_list *lst);
 
-void	update_pos(t_player *player, t_map *map);
-void	handle_rotation(t_player *player);
-void	move_strafe_left(t_player *player, t_map *map);
-void	move_strafe_right(t_player *player, t_map *map);
+void			update_pos(t_player *player, t_map *map);
+void			handle_rotation(t_player *player);
+void			move_strafe_left(t_player *player, t_map *map);
+void			move_strafe_right(t_player *player, t_map *map);
 
-void	draw_rays(t_player *player, t_map *map, t_vars *vars);
-int		draw_cube_player(t_player player, t_vars *vars);
+void			draw_rays(t_player *player, t_map *map, t_vars *vars);
 
-//RAYCASTING
-t_ray	casting(t_player *player, t_map *map, t_vars *vars, double ra);
-void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra);
-void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra);
-float	r_hit_wall(t_ray *ray, t_map *map, t_vars *vars);
+			//RAYCASTING
+t_ray			casting(t_player *player, t_map *map, t_vars *vars, double ra);
+void			r_offset_calc_x(t_ray *ray, t_map *map,
+					t_player *player, double ra);
+void			r_offset_calc_y(t_ray *ray, t_map *map,
+					t_player *player, double ra);
+float			r_hit_wall(t_ray *ray, t_map *map, t_vars *vars);
 
-void	draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
+void			draw_graphics(t_ray *ray, int ray_nb, t_vars *vars);
 
-t_raydraw	init_ray_draw_data(int l_height, t_tex *tex);
-t_tex	get_texture_addr(t_ray *ray, t_vars *vars);
+t_tex			get_texture_addr(t_ray *ray, t_vars *vars);
+t_raydraw		init_ray_draw_data(int l_height, t_tex *tex);
 unsigned int	darken_color(unsigned int color, int dir);
 
-void	draw_floor_ceiling(t_vars *vars, char *floor, char *ceiling);
+void			draw_floor_ceiling(t_vars *vars, char *floor, char *ceiling);
 
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);
-
-
-
-void	free_parse(t_parse *parse);
-void	handle_parse_error(t_parse *parse, int err_code);
-
+void			free_parse(t_parse *parse);
+void			handle_parse_error(t_parse *parse, int err_code);
 
 #endif

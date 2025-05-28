@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvoltair <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 14:15:14 by nvoltair          #+#    #+#             */
+/*   Updated: 2025/05/28 14:15:29 by nvoltair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ERROR_H
 # define ERROR_H
 
@@ -20,10 +32,5 @@
 # define MSG_MAP_FORMAT      "Invalid map format."
 # define MSG_MISSING_PLAYER  "Player start position not found."
 # define MSG_MISSING_TEXTURE "Texture is missing."
-
-
-//# include <cub.h>
-
-//void	handle_parse_error(struct s_parse *parse, int err_code);
 
 #endif

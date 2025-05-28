@@ -12,15 +12,6 @@
 
 #include <cub.h>
 
-static char	normalize_map_char(char c)
-{
-	if (c == '\0')
-		return (' ');
-	//if (c == ' ' )
-	//	return ('0');
-	return (c);
-}
-
 static void	handle_player_char(char dir, int x, int y, t_parse *parse)
 {
 	parse->playerxpos = (x * TILE_SIZE) + (TILE_SIZE / 2);
@@ -51,7 +42,7 @@ int	process_map_line(char *line, int *row, int row_idx, t_parse *parse)
 		return (0);
 	while (j < parse->m_w && j < line_len)
 	{
-		c = normalize_map_char(line[j]);
+		c = line[j];
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		{
 			line_has_player++;

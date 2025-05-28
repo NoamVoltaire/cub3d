@@ -12,7 +12,6 @@
 
 #include <cub.h>
 
-
 void	the_hooks(t_vars *vars)
 {
 	mlx_key_hook(vars->window, escape, vars);

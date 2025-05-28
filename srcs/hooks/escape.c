@@ -32,10 +32,6 @@ void	del_textures(t_vars *vars, t_texture *texture)
 	mlx_destroy_image(vars->mlx, texture->so.img);
 	mlx_destroy_image(vars->mlx, texture->we.img);
 	mlx_destroy_image(vars->mlx, texture->ea.img);
-	//free(texture->no.addr);
-	//free(texture->so.addr);
-	//free(texture->we.addr);
-	//free(texture->ea.addr);
 	free(texture->floor);
 	free(texture->ceiling);
 }
