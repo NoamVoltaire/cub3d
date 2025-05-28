@@ -29,5 +29,6 @@ void	handle_parse_error(t_parse *parse, int err_code)
 	msg = get_error_message(err_code);
 	print_error_msg(msg);
 	free_parse(parse);
+	ft_lstclear(&parse->lines, &free);
 	exit(EXIT_FAILURE);
 }

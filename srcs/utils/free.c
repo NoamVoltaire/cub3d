@@ -24,4 +24,5 @@ void	free_parse(t_parse *parse)
 		}
 		//free(parse->tab);
 	}
+	ft_lstclear(&parse->lines, &free);
 }

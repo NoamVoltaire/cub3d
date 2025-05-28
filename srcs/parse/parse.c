@@ -94,18 +94,18 @@ void	normalize_tab(int **tab, int width, int height)
 
 int	parse_into_vars(int fd, t_vars *vars)
 {
-	t_list	*lines;
 	t_parse	parse;
 
-	lines = get_lines(fd);
+	ft_bzero(&parse, sizeof(t_parse));
+	parse.lines = get_lines(fd);
 	if (close(fd) == -1)
 	{
 		perror("close");
 		return (1);
 	}
-	vars->lst = lines;
-	initialize_vars(lines, &parse);
-	parse.tab = lst_to_int_map(lines, &parse);
+	vars->lst = parse.lines;
+	initialize_vars(parse.lines, &parse);
+	parse.tab = lst_to_int_map(parse.lines, &parse);
 	if (!flood_fill_map(&parse, parse.p_first_xposm,
 			parse.p_first_yposm))
 		handle_parse_error(&vars->parse, ERR_MAP_FORMAT);
@@ -113,7 +113,7 @@ int	parse_into_vars(int fd, t_vars *vars)
 	vars->parse = parse;
 	// NEED ft_lstdelone
 	// NEED FREE TAB
-	if (check_input_syntax(lines) == 1)
+	if (check_input_syntax(parse.lines) == 1)
 		return (1);
 	return (0);
 }

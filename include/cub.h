@@ -71,6 +71,7 @@ typedef struct s_parse
 	int f_color_input[4];
 	int c_color_input[4];
 	int	m_has_player;
+	t_list	*lines;
 }	t_parse;
 
 typedef	struct s_tex

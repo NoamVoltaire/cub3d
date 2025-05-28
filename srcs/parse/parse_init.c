@@ -13,10 +13,7 @@ void	check_args_before_map(t_parse *parse)
 			handle_parse_error(parse, ERR_MISSING_TEXTURE);
 		fd = open(parse->t_paths[i], O_RDONLY);
 		if (fd < 0)
-		{
-			close(fd);
 			handle_parse_error(parse, ERR_FILE_OPEN);
-		}
 		close(fd);
 		i++;
 	}
