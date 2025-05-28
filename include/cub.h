@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/28 09:35:42 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:00:01 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,9 @@ typedef struct s_vars
 //PARSING
 int            print_error_msg(char *msg);
 int            parse_into_vars(int fd, t_vars *vars);
+int		initialize_gnl_data(t_gnl *data, char *save, char **line, int fd);
+int		get_save(t_gnl *data);
+int		get_line(t_gnl *data);
 int            next_gnl(char **line, int fd);
 bool	is_map_line(char *line);
 
