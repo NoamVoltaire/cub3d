@@ -22,8 +22,8 @@
 # define MSG_MISSING_TEXTURE "Texture is missing."
 
 
-# include <cub.h>
+//# include <cub.h>
 
-void	handle_parse_error(struct s_parse *parse, int err_code);
+//void	handle_parse_error(struct s_parse *parse, int err_code);
 
 #endif

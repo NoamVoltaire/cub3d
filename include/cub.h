@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include "../libft/libft.h"
+#include "error.h"
 //# define HEIGHT 1880
 # define HEIGHT 940
 //# define WIDTH 2540
@@ -202,7 +203,15 @@ void	init_t_parse(t_list *lines, t_parse *parse);
 void	initialize_vars(t_list *lst, t_parse *parse);
 
 int	**lst_to_int_map(t_list *lst, t_parse *parse);
+size_t	longest_row(t_list *lst);
+t_list	*skip_to_map_lines(t_list *lst);
+int	**allocate_map_array(size_t rows, size_t cols);
+//int	process_map_line(char *line, int *row, int row_idx, t_parse *parse);
 //int	check_args_before_map(t_list *lines);
+
+
+int	line_into_texture_path(char *line, t_parse *parse, int j);
+int	line_into_color_textures(t_parse *parse, char *line, int j);
 
 void	init_vars(t_vars *vars);
 //void	init_map(t_map *map);

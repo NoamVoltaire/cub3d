@@ -9,7 +9,7 @@ t_tex	get_texture_addr(t_ray *ray, t_vars *vars)
 		return (vars->textures.ea);
 	else if (ray->hit_dir == 2)
 		return (vars->textures.so);
-	else if  (ray->hit_dir == 3)
+	else if (ray->hit_dir == 3)
 		return (vars->textures.we);
 	else
 		return (vars->textures.no);
@@ -38,4 +38,3 @@ unsigned int	darken_color(unsigned int color, int dir)
 	}
 	return ((r << 16) | (g << 8) | b);
 }
-

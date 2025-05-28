@@ -30,13 +30,7 @@ t_ray	casting(t_player *player, t_map *map, t_vars *vars, double ra)
 	rayh.hit_len *= cos(fisheye);
 	rayv.hit_len *= cos(fisheye);
 	if (rayv.hit_len < rayh.hit_len)
-	{
-		//line_drawing(vars, vars->player.xpos, vars->player.ypos, (int)rayv.rx, (int)rayv.ry);
 		return (rayv);
-	}
 	else
-	{
-		//line_drawing(vars, vars->player.xpos, vars->player.ypos, (int)rayh.rx, (int)rayh.ry);
 		return (rayh);
-	}
 }

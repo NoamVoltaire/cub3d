@@ -2,11 +2,11 @@
 
 void	free_parse(t_parse *parse)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!parse)
-		return;
+		return ;
 	while (i < 4)
 	{
 		if (parse->t_paths[i])
@@ -22,6 +22,6 @@ void	free_parse(t_parse *parse)
 				free(parse->tab[i]);
 			i++;
 		}
-		free(parse->tab);
+		//free(parse->tab);
 	}
 }

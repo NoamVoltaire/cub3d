@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:33:39 by noam              #+#    #+#             */
-/*   Updated: 2025/05/26 17:47:00y noam             ###   ########.fr       */
+/*   Updated: 2025/05/26 17:47:00 noam              ###   ########.fr	      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	r_offset_calc_x(t_ray *ray, t_map *map, t_player *player, double ra)
 	else
 		calc_offset_up_down(ray, map, player, ra);
 }
+
 void	calc_offset_right_left(t_ray *ray, t_map *map,
 				t_player *player, double ra)
 {
@@ -93,15 +94,5 @@ void	r_offset_calc_y(t_ray *ray, t_map *map, t_player *player, double ra)
 {
 	ray->ra = ra;
 	ray->hit_dir = 0;
-//	if (ra == 0.0 || fabs(PI - ra) < 0.0001)
-//	{
-//		printf("WEGETTHERE*****\n");
-//		ray->rx = player->xpos;
-//		ray->ry = player->ypos;
-//		ray->xo = player->xpos;
-//		ray->yo = player->ypos;
-//	}
-	//else
-		calc_offset_right_left(ray, map, player, ra);
+	calc_offset_right_left(ray, map, player, ra);
 }
-
