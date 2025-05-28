@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/04/22 16:33:06 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 09:35:42 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@
 # include <X11/X.h> 
 # include <stdbool.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <math.h>
 # include <fcntl.h>
 #include <stdio.h>
 #include <sys/time.h>
-#include "../libft/libft.h"
 #include "error.h"
+# include "libft.h"
+
 //# define HEIGHT 1880
 # define HEIGHT 940
 //# define WIDTH 2540
@@ -102,7 +106,7 @@ typedef	struct s_textures
 	char	*floor;
 	char	*ceiling;
 }	t_texture;
-// #include <time.h>
+
 typedef struct s_raydraw
 {
 	float	t_y_step;
@@ -188,7 +192,6 @@ typedef struct s_vars
 
 }		t_vars;
 
-//int            main_loop(t_vars vars);
 
 //PARSING
 int            print_error_msg(char *msg);
@@ -212,6 +215,7 @@ int	**allocate_map_array(size_t rows, size_t cols);
 
 int	line_into_texture_path(char *line, t_parse *parse, int j);
 int	line_into_color_textures(t_parse *parse, char *line, int j);
+
 
 void	init_vars(t_vars *vars);
 //void	init_map(t_map *map);
