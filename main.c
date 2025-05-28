@@ -6,13 +6,13 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:13:33 by noam              #+#    #+#             */
-/*   Updated: 2025/03/21 17:18:27 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 09:33:25 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub.h>
 
-int	main_loop(t_vars *vars)
+static int	main_loop(t_vars *vars)
 {
 	//t_vars	vars;
 
@@ -27,7 +27,7 @@ int	main_loop(t_vars *vars)
 	return (0);
 }
 
-int	check_map_name(char *str)
+static int	check_map_name(char *str)
 {
 	size_t	len;
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		perror("cub3D");
+	ft_bzero(&vars, sizeof(t_vars));
 	if (parse_into_vars(fd, &vars))
 		return (1);
 	return (main_loop(&vars));

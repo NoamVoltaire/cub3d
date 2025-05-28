@@ -27,8 +27,7 @@ void	handle_parse_error(t_parse *parse, int err_code)
 	char	*msg;
 
 	msg = get_error_message(err_code);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("Error: %s\n", 2);
+	print_error_msg(msg);
 	free_parse(parse);
 	exit(EXIT_FAILURE);
 }

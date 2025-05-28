@@ -6,14 +6,10 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:15:50 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/19 14:26:55 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <error.h>
 #include <cub.h>
-//#include <stddef.h>
-//#include <stdio.h>
 
 static t_list	*get_lines(int fd)
 {
@@ -48,7 +44,7 @@ bool	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] != '\n')
+	while (line[i] && line[i] != '\n')
 	{
 		if (!ft_strchr("01 NSEW", line[i]))
 			return (false);
