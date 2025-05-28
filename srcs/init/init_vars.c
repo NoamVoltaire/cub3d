@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:04:16 by noam              #+#    #+#             */
-/*   Updated: 2025/05/26 17:21:00 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 10:51:09 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ void	init_vars(t_vars *vars)
 	init_window(vars);
 	init_textures(vars, rgb_to_hex(vars->parse.f_color_input),
 		rgb_to_hex(vars->parse.c_color_input));
-	//free_tab(vars->parse.t_paths);
 }

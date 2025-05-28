@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   escape.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:10:22 by noam              #+#    #+#             */
-/*   Updated: 2025/05/26 17:22:59 by noam             ###   ########.fr       */
+/*   Updated: 2025/05/28 10:58:01 by nvoltair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,40 @@ void	delete_map(t_map *map)
 
 void	del_textures(t_vars *vars, t_texture *texture)
 {
-	mlx_destroy_image(vars->mlx, texture->no.addr);
-	mlx_destroy_image(vars->mlx, texture->so.addr);
-	mlx_destroy_image(vars->mlx, texture->we.addr);
-	mlx_destroy_image(vars->mlx, texture->ea.addr);
-	free(texture->no.img);
-	free(texture->so.img);
-	free(texture->we.img);
-	free(texture->ea.img);
+	mlx_destroy_image(vars->mlx, texture->no.img);
+	mlx_destroy_image(vars->mlx, texture->so.img);
+	mlx_destroy_image(vars->mlx, texture->we.img);
+	mlx_destroy_image(vars->mlx, texture->ea.img);
+	//free(texture->no.addr);
+	//free(texture->so.addr);
+	//free(texture->we.addr);
+	//free(texture->ea.addr);
 	free(texture->floor);
 	free(texture->ceiling);
 }
 
-void	quit_everything(t_vars *vars)
+int	quit_everything(void *data)
 {
+	t_vars	*vars;
+
+	vars = (t_vars *)data;
 	del_textures(vars, &vars->textures);
 	mlx_clear_window(vars->mlx, vars->window);
-	mlx_destroy_image(vars->mlx, vars->window);
+	mlx_destroy_image(vars->mlx, vars->img);
 	mlx_destroy_window(vars->mlx, vars->window);
 	mlx_destroy_display(vars->mlx);
-	delete_map(&vars->map);
-	ft_lstclear(&(vars->lst), &free);
-	free(vars);
+	free_parse(&vars->parse);
+	free(vars->mlx);
 	exit(0);
+	return (1);
 }
 
 int	escape(int keycode, t_vars *vars)
 {
+	printf("key is %d\n", keycode);
 	if (keycode == XK_Escape)
 	{
+		printf("01\n");
 		quit_everything(vars);
 	}
 	return (0);

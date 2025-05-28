@@ -12,13 +12,6 @@
 
 #include <cub.h>
 
-int	close_window(t_vars *vars)
-{
-	mlx_destroy_window(vars->mlx, vars->window);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	exit(0);
-}
 
 void	the_hooks(t_vars *vars)
 {
@@ -26,5 +19,5 @@ void	the_hooks(t_vars *vars)
 	mlx_hook(vars->window, KeyPress, KeyPressMask, handle_key_press, vars);
 	mlx_hook(vars->window, KeyRelease, KeyReleaseMask, handle_key_release,
 		vars);
-	mlx_hook(vars->window, 17, 0L, close_window, vars);
+	mlx_hook(vars->window, 17, 0L, quit_everything, vars);
 }

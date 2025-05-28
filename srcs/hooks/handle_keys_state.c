@@ -27,7 +27,7 @@ int	handle_key_press(int keycode, t_vars *vars)
 	if (keycode == XK_Left)
 		vars->player.keybind.see_left = true;
 	if (keycode == 65307)
-		close_window(vars);
+		quit_everything(vars);
 	return (0);
 }
 

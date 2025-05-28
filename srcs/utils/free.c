@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 10:53:20 by nvoltair          #+#    #+#             */
+/*   Updated: 2025/05/28 10:57:23 by nvoltair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub.h>
 
 void	free_parse(t_parse *parse)
@@ -22,7 +34,7 @@ void	free_parse(t_parse *parse)
 				free(parse->tab[i]);
 			i++;
 		}
-		//free(parse->tab);
+		free(parse->tab);
 	}
 	ft_lstclear(&parse->lines, &free);
 }

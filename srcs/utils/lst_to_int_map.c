@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_to_int_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvoltair <nvoltair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 10:53:02 by nvoltair          #+#    #+#             */
+/*   Updated: 2025/05/28 13:14:13 by nvoltair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub.h>
 
 static char	normalize_map_char(char c)
 {
 	if (c == '\0')
-		return ('1');
-	if (c == ' ' )
-		return ('0');
+		return (' ');
+	//if (c == ' ' )
+	//	return ('0');
 	return (c);
 }
 
@@ -46,7 +58,7 @@ int	process_map_line(char *line, int *row, int row_idx, t_parse *parse)
 			handle_player_char(c, j, row_idx, parse);
 			c = '0';
 		}
-		row[j] = c - '0';
+		row[j] = c;
 		j++;
 	}
 	return (line_has_player);
@@ -78,6 +90,7 @@ int	**lst_to_int_map(t_list *lst, t_parse *parse)
 	size_t	cols;
 
 	lst = skip_to_map_lines(lst);
+	replace_newlines(lst);
 	rows = ft_lstsize(lst);
 	cols = longest_row(lst);
 	parse->m_w = cols;
