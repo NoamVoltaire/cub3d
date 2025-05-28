@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:29:32 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/28 10:03:42 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:43:27 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	clean_data(t_gnl *data)
 
 static char	*custom_strjoin(char **temp, char *save)
 {
-	char *joined;
+	char	*joined;
 
 	joined = ft_strjoin(*temp, save);
 	free(*temp);

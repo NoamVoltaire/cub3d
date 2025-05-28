@@ -5,7 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 13:15:50 by lgrellie          #+#    #+#             */
+/*   Created: 2025/05/28 10:41:07 by lgrellie          #+#    #+#             */
+/*   Updated: 2025/05/28 10:42:57 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +112,5 @@ int	parse_into_vars(int fd, t_vars *vars)
 		handle_parse_error(&vars->parse, ERR_MAP_FORMAT);
 	normalize_tab(parse.tab, parse.m_w, parse.m_h);
 	vars->parse = parse;
-	// NEED ft_lstdelone
-	// NEED FREE TAB
-	if (check_input_syntax(parse.lines) == 1)
-		return (1);
 	return (0);
 }
