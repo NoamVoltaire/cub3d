@@ -6,7 +6,7 @@
 /*   By: noam <noam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:48:55 by noam              #+#    #+#             */
-/*   Updated: 2025/05/28 10:00:01 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:51:16 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,6 @@ typedef	struct s_tex
 
 typedef	struct s_textures
 {
-//	void	*no_texture;
-//	void	*so_texture;
-//	void	*we_texture;
-//	void	*ea_texture;
-//	char	*t_addr_no;
-//	char	*t_addr_so;
-//	char	*t_addr_we;
-//	char	*t_addr_ea;
-
 	t_tex	no;
 	t_tex	so;
 	t_tex	we;
@@ -190,34 +181,26 @@ typedef struct s_vars
 
 
 //PARSING
-int            print_error_msg(char *msg);
-int            parse_into_vars(int fd, t_vars *vars);
+int		print_error_msg(char *msg);
+int		parse_into_vars(int fd, t_vars *vars);
 int		initialize_gnl_data(t_gnl *data, char *save, char **line, int fd);
 int		get_save(t_gnl *data);
 int		get_line(t_gnl *data);
-int            next_gnl(char **line, int fd);
+int		next_gnl(char **line, int fd);
 bool	is_map_line(char *line);
-
 void	init_f_c_parse(t_list *lines, t_parse *parse);
 void	init_t_parse(t_list *lines, t_parse *parse);
-
-
 void	initialize_vars(t_list *lst, t_parse *parse);
-
-int	**lst_to_int_map(t_list *lst, t_parse *parse);
+int		**lst_to_int_map(t_list *lst, t_parse *parse);
 size_t	longest_row(t_list *lst);
 t_list	*skip_to_map_lines(t_list *lst);
-int	**allocate_map_array(size_t rows, size_t cols);
+int		**allocate_map_array(size_t rows, size_t cols);
 //int	process_map_line(char *line, int *row, int row_idx, t_parse *parse);
 //int	check_args_before_map(t_list *lines);
-
-
-int	line_into_texture_path(char *line, t_parse *parse, int j);
-int	line_into_color_textures(t_parse *parse, char *line, int j);
-
+int		line_into_texture_path(char *line, t_parse *parse, int j);
+int		line_into_color_textures(t_parse *parse, char *line, int j);
 
 void	init_vars(t_vars *vars);
-//void	init_map(t_map *map);
 void	init_map(t_map *map, t_parse *parse);
 void	init_player(t_player *player, t_parse *parse);
 void	init_window(t_vars *vars);

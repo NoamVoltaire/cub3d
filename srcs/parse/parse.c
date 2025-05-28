@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:41:07 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/28 10:42:57 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:49:34 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,6 @@ bool	is_map_line(char *line)
 	if (i == 0)
 		return (false);
 	return (true);
-}
-
-int	check_input_syntax(t_list *input)
-{
-	t_list	*line;
-
-	if (input == NULL)
-		return (1);
-	line = input;
-	while (line != NULL)
-	{
-		if (is_map_line(line->content))
-			printf("true\n");
-		else
-			printf("false\n");
-		line = line->next;
-	}
-	return (0);
 }
 
 void	normalize_tab(int **tab, int width, int height)
