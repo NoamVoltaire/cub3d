@@ -6,7 +6,7 @@
 /*   By: lgrellie <lgrellie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:15:50 by lgrellie          #+#    #+#             */
-/*   Updated: 2025/05/26 09:09:46 by lgrellie         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:25:23 by lgrellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	parse_into_vars(int fd, t_vars *vars)
 		perror("close");
 		return (1);
 	}
-	(void)vars;
 	t_list *ptr = lines;
 	while (ptr)
 	{
