@@ -19,7 +19,7 @@ void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 	int		nb_rays;
 
 	nb_rays = 0;
-	ra = player->angle -(DR / 2 * 64);
+	ra = player->angle - (DR / 2 * 64);
 	while (nb_rays < 128)
 	{
 		if (ra < 0)
@@ -27,9 +27,9 @@ void	draw_rays(t_player *player, t_map *map, t_vars *vars)
 		if (ra > 2 * PI)
 			ra -= 2 * PI;
 		ray = casting(player, map, vars, ra);
-		ra += DR / 2;
-		nb_rays++;
 		draw_graphics(&ray, nb_rays, vars);
+		ra += (DR / 2);
+		nb_rays++;
 	}
 }
 

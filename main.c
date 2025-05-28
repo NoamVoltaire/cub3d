@@ -18,6 +18,7 @@ int	main_loop(t_vars *vars)
 
 	init_vars(vars);
 	the_hooks(vars);
+	
 	//if (!vars.textures.t_addr)  // Exit function early to prevent crash
 		 //printf("ITSNULLLLLLLLLL");
 		// printf("vars.player.xpos = %f\n", vars.player.xpos);

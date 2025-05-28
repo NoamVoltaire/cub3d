@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error.h"
 #include <cub.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -307,10 +308,9 @@ int	parse_into_vars(int fd, t_vars *vars)
 	parse.tab = lst_to_int_map(lines, &parse);
 	if (!flood_fill_map(&parse, parse.p_first_xposm,
 			parse.p_first_yposm))
-		printf("damn the room is not floodtight\n");
-	normalize_tab(parse.tab, parse.m_w , parse.m_h);
-		
-
+		handle_parse_error(&vars->parse, ERR_MAP_FORMAT);
+		//printf("damn the room is not floodtight\n");
+	normalize_tab(parse.tab, parse.m_w, parse.m_h);
 	vars->parse = parse;
 	// NEED ft_lstdelone
 	// NEED FREE TAB

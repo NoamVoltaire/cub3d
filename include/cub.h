@@ -65,6 +65,7 @@ typedef struct s_parse
 	char	*t_paths[4];
 	int f_color_input[4];
 	int c_color_input[4];
+	int	m_has_player;
 	//char	*
 	
 	//char	*no_path;
@@ -201,7 +202,7 @@ void	init_t_parse(t_list *lines, t_parse *parse);
 void	initialize_vars(t_list *lst, t_parse *parse);
 
 int	**lst_to_int_map(t_list *lst, t_parse *parse);
-int	check_args_before_map(t_list *lines);
+//int	check_args_before_map(t_list *lines);
 
 void	init_vars(t_vars *vars);
 //void	init_map(t_map *map);
@@ -244,5 +245,11 @@ void	draw_floor_ceiling(t_vars *vars, char *floor, char *ceiling);
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void	line_drawing(t_vars *vars, int x0, int y0, int x1, int y1);
+
+
+
+void	free_parse(t_parse *parse);
+void	handle_parse_error(t_parse *parse, int err_code);
+
 
 #endif

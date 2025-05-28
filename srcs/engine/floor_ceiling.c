@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <cub.h>
 
 static void	fill_with_color(t_vars *vars, char *row, int start, int end)
@@ -24,7 +23,7 @@ static void	fill_with_color(t_vars *vars, char *row, int start, int end)
 	while (j < end)
 	{
 		pixel_y_pos = vars->addr + j * vars->line_length;
-		memcpy(pixel_y_pos, row, WIDTH * bytes);
+		ft_memcpy(pixel_y_pos, row, WIDTH * bytes);
 		j++;
 	}
 }

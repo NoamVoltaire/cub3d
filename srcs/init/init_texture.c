@@ -22,7 +22,7 @@ char	*fill_floor_ceiling_array(t_vars *vars, int color)
 	bytes = vars->bits_per_pixel / 8;
 	row = malloc(sizeof(char) * WIDTH * (vars->bits_per_pixel / 8));
 	while (i++ < WIDTH - 1)
-		memcpy(row + i * bytes, &color, bytes);
+		ft_memcpy(row + i * bytes, &color, bytes);
 	return (row);
 }
 
